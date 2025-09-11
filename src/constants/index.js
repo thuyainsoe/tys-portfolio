@@ -1,6 +1,7 @@
 import project1 from "../assets/projects/project-1.png";
 import project2 from "../assets/projects/project-2.png";
 import project3 from "../assets/projects/project-3.png";
+import project4 from "../assets/projects/project-4.png";
 
 export const HERO_CONTENT = `I craft responsive, SEO-friendly, and scalable web applications using React, TypeScript, and modern frameworks. With 3+ years of experience, I specialize in building HR systems, e-commerce platforms, and business websites that combine performance with great user experience.`;
 
@@ -38,12 +39,20 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "Inventory Management System",
+    image: project4,
+    description:
+      "A full-stack application built with NestJS and React, designed to manage users, products, and purchase orders. The project is still in progress and serves as a practical learning experience while I explore and improve my skills with NestJS. It demonstrates my ability to structure backend APIs, integrate them with a React frontend, and build scalable features step by step.",
+    technologies: ["NestJS", "React", "TypeScript", "PostgreSQL"],
+    github: "https://github.com/thuyainsoe/inventory-management",
+  },
+  {
     title: "E-Commerce Website",
     image: project1,
     description:
       "A fully functional e-commerce website with features like product listing, shopping cart, and user authentication.",
     technologies: ["HTML", "CSS", "React", "Node.js", "MongoDB"],
-    github: "https://github.com/username/ecommerce-website",
+    github: "https://github.com/thuyainsoe/neobyte",
     demo: "http://neobyte.vercel.app/",
   },
   {
@@ -53,7 +62,7 @@ export const PROJECTS = [
       "A UI preview of an NFT marketplace platform showcasing features like wallet integration and smart contracts for buying, selling, and trading NFTs",
     technologies: ["HTML", "CSS", "React", "Tailwind CSS"],
     github: "https://github.com/username/nft-marketplace",
-    demo: "https://https://nft-marketplace-psi-rouge.vercel.app/",
+    demo: "https://github.com/thuyainsoe/nft-marketplace",
   },
   {
     title: "Uni China",
