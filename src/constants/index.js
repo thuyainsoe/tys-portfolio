@@ -61,8 +61,8 @@ export const PROJECTS = [
     description:
       "A UI preview of an NFT marketplace platform showcasing features like wallet integration and smart contracts for buying, selling, and trading NFTs",
     technologies: ["HTML", "CSS", "React", "Tailwind CSS"],
-    github: "https://github.com/username/nft-marketplace",
-    demo: "https://github.com/thuyainsoe/nft-marketplace",
+    github: "https://github.com/thuyainsoe/nft-marketplace",
+    demo: "https://nft-marketplace-psi-rouge.vercel.app/",
   },
   {
     title: "Uni China",

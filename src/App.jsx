@@ -20,7 +20,7 @@ function App() {
         </div>
       </div>
 
-      <div className="container mx-auto px-8 w-full">
+      <div className="container mx-auto px-6 w-full">
         <Navbar />
         <Hero />
         <About />
