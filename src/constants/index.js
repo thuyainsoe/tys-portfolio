@@ -1,7 +1,6 @@
 import project1 from "../assets/projects/project-1.png";
 import project2 from "../assets/projects/project-2.png";
-import project3 from "../assets/projects/project-3.jpg";
-import project4 from "../assets/projects/project-4.jpg";
+import project3 from "../assets/projects/project-3.png";
 
 export const HERO_CONTENT = `I craft responsive, SEO-friendly, and scalable web applications using React, TypeScript, and modern frameworks. With 3+ years of experience, I specialize in building HR systems, e-commerce platforms, and business websites that combine performance with great user experience.`;
 
@@ -50,9 +49,17 @@ export const PROJECTS = [
     image: project2,
     description:
       "A UI preview of an NFT marketplace platform showcasing features like wallet integration and smart contracts for buying, selling, and trading NFTs",
-    technologies: ["HTML", "CSS", "React", "Solidity"],
+    technologies: ["HTML", "CSS", "React", "Tailwind CSS"],
     github: "https://github.com/username/nft-marketplace",
     demo: "https://https://nft-marketplace-psi-rouge.vercel.app/",
+  },
+  {
+    title: "Uni China",
+    image: project3,
+    description:
+      "A client project highlighting Uni-China Group’s 25 years in retail, food trading, and F&B, with 1,000+ sales points and 5,000 employees driving sustainable growth.",
+    technologies: ["HTML", "CSS", "Wordpress", "Javascript", "PHP"],
+    demo: "https://uni-china.com/",
   },
   // {
   //   title: "Portfolio Website",
