@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { PROJECTS } from "../constants";
 import { motion } from "framer-motion";
 
 const Projects = () => {
+  const [activeProject, setActiveProject] = useState(null);
+
   return (
     <div className="mb-20 lg:mb-40 w-full">
       <motion.h1
@@ -35,17 +37,26 @@ const Projects = () => {
               {project.title}
             </h6>
 
-            {/* Image container with hover effects */}
-            <div className="relative w-full aspect-[3/2] shadow-lg overflow-hidden rounded group cursor-pointer">
+            {/* Image container with hover/touch effects */}
+            <div 
+              className="relative w-full aspect-[3/2] shadow-lg overflow-hidden rounded group cursor-pointer"
+              onClick={() => setActiveProject(activeProject === index ? null : index)}
+              onMouseEnter={() => setActiveProject(index)}
+              onMouseLeave={() => setActiveProject(null)}
+            >
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                className={`w-full h-full object-cover object-center transition-transform duration-300 ${
+                  activeProject === index ? 'scale-105' : ''
+                }`}
               />
 
-              {/* Hover overlay with description and tech stack */}
-              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
-                <p className="text-white text-sm lg:text-base mb-4 lg:mb-6 leading-relaxed">
+              {/* Overlay with description and tech stack */}
+              <div className={`absolute inset-0 bg-black/80 transition-opacity duration-300 flex flex-col justify-center items-center p-4 lg:p-6 text-center ${
+                activeProject === index ? 'opacity-100' : 'opacity-0 lg:group-hover:opacity-100'
+              }`}>
+                <p className="text-white text-sm lg:text-base mb-3 lg:mb-6 leading-relaxed">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center">
