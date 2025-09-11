@@ -35,16 +35,15 @@ const Projects = () => {
             </h6>
 
             {/* Image container with hover/touch effects */}
-            <div className="relative w-full aspect-[3/2] shadow-lg overflow-hidden rounded-xl group cursor-pointer active:scale-[0.98] transition-transform duration-150">
+            <div className="relative w-full aspect-[893/475] shadow-lg overflow-hidden rounded-xl group cursor-pointer active:scale-[0.98] transition-transform duration-150">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 group-active:scale-105"
+                className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 group-active:scale-105"
               />
 
               {/* Overlay with description and tech stack */}
-              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4 lg:p-6 text-center"
-              >
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4 lg:p-6 text-center">
                 <p className="text-white text-sm lg:text-base mb-3 lg:mb-6 leading-relaxed">
                   {project.description}
                 </p>
