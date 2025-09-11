@@ -10,7 +10,7 @@ const About = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.8 }}
         transition={{ duration: 0.5 }}
-        className="lg:text-center text-4xl mb-15 text-left"
+        className="lg:text-center text-4xl mb-10 lg:mb-15 text-left"
       >
         About Me
       </motion.h1>

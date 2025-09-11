@@ -10,7 +10,7 @@ const Experience = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.8 }}
         transition={{ duration: 0.5 }}
-        className="lg:text-center text-4xl mb-15 text-left"
+        className="lg:text-center text-4xl mb-10 lg:mb-15 text-left"
       >
         Experiences
       </motion.h1>
@@ -39,14 +39,16 @@ const Experience = () => {
                 <span className="text-sm text-purple-100">{exp.company}</span>
               </h6>
               <p className="mb-4 text-neutral-400">{exp.description}</p>
-              {exp.technologies?.map((tech, techIndex) => (
-                <span
-                  key={techIndex}
-                  className="mr-2 mt-4 rounded bg-white/90 px-2 py-1 text-xs font-medium text-black"
-                >
-                  {tech}
-                </span>
-              ))}
+              <div className="flex flex-wrap gap-2">
+                {exp.technologies?.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className="rounded bg-white/90 px-2 py-1 text-xs font-medium text-black"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
         ))}
