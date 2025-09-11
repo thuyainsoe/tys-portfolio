@@ -6,8 +6,8 @@ import SectionTitle from "./SectionTitle";
 const Experience = () => {
   return (
     <div className="mb-16 lg:mb-20 w-full">
-      <SectionTitle 
-        title="Experience" 
+      <SectionTitle
+        title="Experience"
         subtitle="My professional journey and career highlights"
       />
       <motion.div
@@ -39,7 +39,7 @@ const Experience = () => {
                   rel="noopener noreferrer"
                   className="text-neutral-400 hover:text-purple-400 transition-colors duration-200 text-sm font-medium inline-block"
                 >
-                  @ {exp.company} ↗
+                  @ {exp.company}
                 </a>
               </div>
 
