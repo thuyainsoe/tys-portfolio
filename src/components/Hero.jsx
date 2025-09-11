@@ -51,15 +51,15 @@ const Hero = () => {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="relative w-full lg:w-[80%] max-w-md"
+            className="relative w-full  aspect-square lg:w-[80%] lg:h-auto lg:max-w-md"
           >
             {/* Glowing background effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-purple-600/20 rounded-full blur-2xl animate-pulse"></div>
 
             {/* Main image container */}
-            <div className="relative bg-gradient-to-br from-neutral-800 to-neutral-900 p-1 rounded-full shadow-2xl">
+            <div className="relative bg-gradient-to-br from-neutral-800 to-neutral-900 p-1 rounded-full shadow-2xl w-full h-full">
               <img
-                className="w-full aspect-square object-cover object-top scale-110 rounded-full border-2 border-neutral-700  transition-all duration-500 brightness-70"
+                className="w-full h-full object-cover object-center rounded-full border-2 border-neutral-700 transition-all duration-500"
                 src={profilePic}
                 alt="Thurein Soe - Frontend Developer"
               />
