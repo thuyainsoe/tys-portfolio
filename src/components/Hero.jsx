@@ -1,4 +1,4 @@
-import profilePic from "../assets/kevinRushProfile.png";
+import profilePic from "../assets/profile.jpg";
 import { HERO_CONTENT } from "../constants";
 import { delay, motion } from "framer-motion";
 
@@ -49,7 +49,7 @@ const Hero = () => {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="rounded-full"
+            className="rounded-full w-full lg:w-[80%]"
             src={profilePic}
             alt=""
           />

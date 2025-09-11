@@ -6,10 +6,16 @@ import {
   SiTypescript,
   SiSass,
   SiNodedotjs,
-  SiNestjs,
-  SiExpress,
-  SiMongodb,
-  SiPostgresql,
+  SiVuedotjs,
+  SiTailwindcss,
+  SiRedux,
+  SiGit,
+  SiVite,
+  SiGraphql,
+  SiWordpress,
+  SiPhp,
+  SiHtml5,
+  SiCss3,
 } from "react-icons/si";
 import { motion } from "framer-motion";
 
@@ -26,14 +32,34 @@ const Technologies = () => {
       color: "text-white",
     },
     {
+      name: "TypeScript",
+      icon: <SiTypescript className="w-12 h-12" />,
+      color: "text-blue-600",
+    },
+    {
       name: "JavaScript",
       icon: <SiJavascript className="w-12 h-12" />,
       color: "text-yellow-400",
     },
     {
-      name: "TypeScript",
-      icon: <SiTypescript className="w-12 h-12" />,
-      color: "text-blue-600",
+      name: "Vue.js",
+      icon: <SiVuedotjs className="w-12 h-12" />,
+      color: "text-green-500",
+    },
+    {
+      name: "HTML5",
+      icon: <SiHtml5 className="w-12 h-12" />,
+      color: "text-orange-500",
+    },
+    {
+      name: "CSS3",
+      icon: <SiCss3 className="w-12 h-12" />,
+      color: "text-blue-500",
+    },
+    {
+      name: "Tailwind CSS",
+      icon: <SiTailwindcss className="w-12 h-12" />,
+      color: "text-cyan-400",
     },
     {
       name: "Sass",
@@ -41,29 +67,39 @@ const Technologies = () => {
       color: "text-pink-500",
     },
     {
+      name: "Redux",
+      icon: <SiRedux className="w-12 h-12" />,
+      color: "text-purple-500",
+    },
+    {
       name: "Node.js",
       icon: <SiNodedotjs className="w-12 h-12" />,
       color: "text-green-600",
     },
     {
-      name: "NestJS",
-      icon: <SiNestjs className="w-12 h-12" />,
-      color: "text-red-500",
+      name: "GraphQL",
+      icon: <SiGraphql className="w-12 h-12" />,
+      color: "text-pink-400",
     },
     {
-      name: "Express",
-      icon: <SiExpress className="w-12 h-12" />,
-      color: "text-gray-600",
+      name: "Git",
+      icon: <SiGit className="w-12 h-12" />,
+      color: "text-orange-600",
     },
     {
-      name: "MongoDB",
-      icon: <SiMongodb className="w-12 h-12" />,
-      color: "text-green-500",
+      name: "Vite",
+      icon: <SiVite className="w-12 h-12" />,
+      color: "text-yellow-500",
     },
     {
-      name: "PostgreSQL",
-      icon: <SiPostgresql className="w-12 h-12" />,
-      color: "text-blue-700",
+      name: "WordPress",
+      icon: <SiWordpress className="w-12 h-12" />,
+      color: "text-blue-600",
+    },
+    {
+      name: "PHP",
+      icon: <SiPhp className="w-12 h-12" />,
+      color: "text-indigo-400",
     },
   ];
 
