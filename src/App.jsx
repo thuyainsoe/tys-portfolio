@@ -24,7 +24,7 @@ function App() {
         <Navbar />
         <Hero />
         <About />
-        <Technologies />
+        {/* <Technologies /> */}
         <Experience />
         <Projects />
         <Contact />

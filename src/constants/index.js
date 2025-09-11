@@ -24,6 +24,7 @@ export const EXPERIENCES = [
       "Framer Motion",
       "Shadcn",
     ],
+    link: "https://visibleone.com/",
   },
   {
     year: "Oct 2022 - Nov 2023",
@@ -31,6 +32,7 @@ export const EXPERIENCES = [
     company: "Better HR",
     description: `Built responsive HR management features with Vue.js for employee data, attendance, leave, and payroll processing. Contributed to a SaaS platform managing $8M+ in monthly salaries across multiple countries, ensuring scalability and reliability. Optimized UI components and reduced bugs by 20%, improving user satisfaction and adoption.`,
     technologies: ["Vue.js", "JavaScript", "CSS", "HTML", "SaaS"],
+    link: "https://betterhr.io/",
   },
 ];
 
@@ -57,7 +59,7 @@ export const PROJECTS = [
     title: "Uni China",
     image: project3,
     description:
-      "A client project highlighting Uni-China Group’s 25 years in retail, food trading, and F&B, with 1,000+ sales points and 5,000 employees driving sustainable growth.",
+      "Contributed to the UI development of a corporate site showcasing Uni-China Group’s 25-year business presence across retail, food trading, and F&B. Focused on responsive design, clean layout, and modern frontend practices",
     technologies: ["HTML", "CSS", "Wordpress", "Javascript", "PHP"],
     demo: "https://uni-china.com/",
   },

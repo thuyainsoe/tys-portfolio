@@ -1,49 +1,59 @@
 import React from "react";
 import { EXPERIENCES } from "../constants";
 import { motion } from "framer-motion";
+import SectionTitle from "./SectionTitle";
 
 const Experience = () => {
   return (
-    <div className="mb-20 lg:mb-40 w-full">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.8 }}
-        transition={{ duration: 0.5 }}
-        className="lg:text-center text-4xl mb-10 lg:mb-15 text-left"
-      >
-        Experiences
-      </motion.h1>
+    <div className="mb-16 lg:mb-20 w-full">
+      <SectionTitle 
+        title="Experience" 
+        subtitle="My professional journey and career highlights"
+      />
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-left"
+        className="space-y-4 lg:space-y-6 text-left"
       >
         {EXPERIENCES.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            className="mb-8 flex flex-wrap lg:justify-center"
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 lg:p-8 hover:border-neutral-700 transition-colors duration-300"
           >
-            <div className="w-full lg:w-1/4">
-              <p className="mb-2 text-sm text-neutral-400">{exp.year}</p>
-            </div>
-            <div className="w-full max-w-xl lg:w-3/4">
-              <h6 className="mb-2 font-medium">
-                {exp.role} -{" "}
-                <span className="text-sm text-purple-100">{exp.company}</span>
-              </h6>
-              <p className="mb-4 text-neutral-400">{exp.description}</p>
-              <div className="flex flex-wrap gap-2">
+            <div className="space-y-4">
+              {/* Header section with year, role, and company */}
+              <div className="space-y-2">
+                <p className="text-xs text-neutral-500 font-medium uppercase tracking-wider">
+                  {exp.year}
+                </p>
+                <h3 className="text-white font-medium text-lg">{exp.role}</h3>
+                <a
+                  href={exp.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-400 hover:text-purple-400 transition-colors duration-200 text-sm font-medium inline-block"
+                >
+                  @ {exp.company} ↗
+                </a>
+              </div>
+
+              {/* Description */}
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                {exp.description}
+              </p>
+
+              {/* Tech stack */}
+              <div className="flex flex-wrap gap-1.5 pt-2">
                 {exp.technologies?.map((tech, techIndex) => (
                   <span
                     key={techIndex}
-                    className="rounded bg-white/90 px-2 py-1 text-xs font-medium text-black"
+                    className="px-2 py-1 text-xs text-neutral-400 bg-neutral-900/50 rounded border border-neutral-800/50"
                   >
                     {tech}
                   </span>
