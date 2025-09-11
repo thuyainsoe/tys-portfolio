@@ -14,10 +14,17 @@ Beyond coding, I enjoy collaborating with teams, learning new technologies, and 
 export const EXPERIENCES = [
   {
     year: "Nov 2023 - Present",
-    role: "Senior Frontend Developer",
+    role: "Frontend Developer",
     company: "Visible One",
     description: `Developed responsive websites and e-commerce platforms using React, TypeScript, and Next.js, improving page load speed by up to 30%. Implemented SEO best practices and optimized front-end performance, increasing search rankings and conversion rates. Collaborated with designers and backend developers to deliver custom digital solutions for businesses in Hong Kong across multiple industries.`,
-    technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Shadcn",
+    ],
   },
   {
     year: "Oct 2022 - Nov 2023",
