@@ -19,6 +19,7 @@ const Projects = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, delay: 0.2 }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12"
       >
         {PROJECTS.map((project, index) => (
           <motion.div
@@ -26,42 +27,39 @@ const Projects = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            className="mb-8 flex flex-wrap lg:justify-center text-left"
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="w-full"
           >
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
-              className="w-full lg:w-1/4 pr-0 lg:pr-10"
-            >
+            {/* Title above the image */}
+            <h6 className="text-white font-semibold text-xl mb-4 text-left">
+              {project.title}
+            </h6>
+
+            {/* Image container with hover effects */}
+            <div className="relative w-full aspect-[3/2] shadow-lg overflow-hidden rounded group cursor-pointer">
               <img
                 src={project.image}
-                width={150}
-                height={150}
                 alt={project.title}
-                className="mb-6 w-full rounded aspect-[4_/_3] object-cover object-top"
+                className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
               />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 + 0.4 }}
-              className="w-full max-w-xl lg:w-3/4"
-            >
-              <h6 className="mb-2 font-medium ">{project.title}</h6>
-              <p className="mb-4 text-neutral-400">{project.description}</p>
-              {project.technologies?.map((tech, techIndex) => (
-                <span
-                  key={techIndex}
-                  className="mr-2 mt-4 rounded bg-white/90 px-2 py-1 text-xs font-medium text-black"
-                >
-                  {tech}
-                </span>
-              ))}
-            </motion.div>
+
+              {/* Hover overlay with description and tech stack */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                <p className="text-white text-sm lg:text-base mb-4 lg:mb-6 leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {project.technologies?.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="rounded-full bg-white/90 px-2 py-1 lg:px-3 lg:py-1 text-xs font-medium text-black"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </motion.div>
         ))}
       </motion.div>

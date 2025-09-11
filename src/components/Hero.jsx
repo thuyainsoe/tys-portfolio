@@ -45,14 +45,31 @@ const Hero = () => {
       </div>
       <div className="w-full lg:w-1/2">
         <div className="flex justify-center lg:justify-end">
-          <motion.img
+          <motion.div
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="rounded-full w-full lg:w-[80%]"
-            src={profilePic}
-            alt=""
-          />
+            className="relative w-full lg:w-[80%] max-w-md"
+          >
+            {/* Glowing background effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-purple-600/20 rounded-full blur-2xl animate-pulse"></div>
+            
+            {/* Main image container */}
+            <div className="relative bg-gradient-to-br from-neutral-800 to-neutral-900 p-1 rounded-full shadow-2xl">
+              <img
+                className="w-full aspect-square object-cover rounded-full border-2 border-neutral-700 hover:border-purple-500/50 transition-all duration-500 hover:brightness-110 hover:contrast-110"
+                src={profilePic}
+                alt="Thurein Soe - Frontend Developer"
+              />
+              
+              {/* Subtle overlay for better contrast */}
+              <div className="absolute inset-1 rounded-full bg-gradient-to-t from-neutral-900/20 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+            
+            {/* Decorative elements */}
+            <div className="absolute -top-2 -right-2 w-4 h-4 bg-purple-500 rounded-full animate-ping"></div>
+            <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-pink-500 rounded-full animate-pulse"></div>
+          </motion.div>
         </div>
       </div>
     </div>
