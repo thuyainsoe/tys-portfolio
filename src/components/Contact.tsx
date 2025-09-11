@@ -3,7 +3,7 @@ import { CONTACT } from "../constants";
 const Contact = () => {
   return (
     <div className="mb-20 w-full">
-      <h1 className="lg:text-center text-4xl mb-10 lg:mb-15 text-left">
+      <h1 className="lg:text-center text-4xl mb-10 lg:mb-15 text-center">
         Get in touch
       </h1>
       <div className="text-center tracking-tighter">
