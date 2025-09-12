@@ -6,11 +6,13 @@ import Technologies from "./components/Technologies";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import MouseGlow from "./components/MouseGlow";
 import { motion } from "framer-motion";
 
 function App() {
   return (
     <div className="overflow-x-hidden w-full text-neutral-300 antialiased selection:bg-cyan-300 selection:text-cyan-900">
+      <MouseGlow />
       <div className="fixed top-0 -z-10 h-full w-full">
         <div className="relative h-full w-full bg-white">
           <div className="relative h-full w-full bg-black">
