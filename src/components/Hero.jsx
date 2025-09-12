@@ -10,14 +10,17 @@ const container = (delay) => ({
     transition: {
       duration: 0.5,
       delay: delay,
-      ease: "easeOut"
+      ease: "easeOut",
     },
   },
 });
 
 const Hero = () => {
   return (
-    <div className="text-left flex flex-col lg:flex-row items-center lg:items-center lg:justify-between mb-16 lg:mb-20 gap-y-8" style={{transform: 'translateZ(0)'}}>
+    <div
+      className="text-left flex flex-col lg:flex-row items-center lg:items-center lg:justify-between mb-16 lg:mb-20 gap-y-8"
+      style={{ transform: "translateZ(0)" }}
+    >
       <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start">
         <motion.h1
           variants={container(0)}
@@ -59,7 +62,7 @@ const Hero = () => {
               <img
                 className="w-full h-full object-cover object-center rounded-full  transition-all duration-500"
                 src={profilePic}
-                alt="Thurein Soe - Frontend Developer"
+                alt="Thu Yain Soe - Frontend Developer"
               />
             </div>
           </motion.div>
