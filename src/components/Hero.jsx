@@ -28,7 +28,7 @@ const Hero = () => {
           animate="visible"
           className="pb-8 text-6xl font-thin tracking-tight  lg:text-8xl text-left w-full"
         >
-          Thurein Soe
+          Thu Yain Soe
         </motion.h1>
         <motion.p
           variants={container(0.5)}
