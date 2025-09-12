@@ -11,18 +11,18 @@ const Experience = () => {
         subtitle="My professional journey and career highlights"
       />
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        initial={{ y: 40 }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
         className="space-y-4 lg:space-y-6 text-left"
       >
         {EXPERIENCES.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ y: 30, scale: 0.95 }}
+            whileInView={{ y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
             className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 lg:p-8 hover:border-neutral-700 transition-colors duration-300"
           >
