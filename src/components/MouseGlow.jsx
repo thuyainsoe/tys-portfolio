@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 const MouseGlow = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [glowPosition, setGlowPosition] = useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      if (!isVisible) setIsVisible(true);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -14,7 +16,7 @@ const MouseGlow = () => {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isVisible]);
 
   useEffect(() => {
     const followMouse = () => {
@@ -41,7 +43,7 @@ const MouseGlow = () => {
         borderRadius: "50%",
         filter: "blur(25px)",
         transition: "opacity 0.3s ease",
-        opacity: 1,
+        opacity: isVisible ? 1 : 0,
       }}
     />
   );

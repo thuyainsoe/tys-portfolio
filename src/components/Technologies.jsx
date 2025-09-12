@@ -17,6 +17,7 @@ import {
   SiHtml5,
   SiCss3,
 } from "react-icons/si";
+import { motion } from "framer-motion";
 
 const Technologies = () => {
   const technologies = [
@@ -104,22 +105,38 @@ const Technologies = () => {
 
   return (
     <div className="mb-20 lg:mb-40">
-      <h1 className="lg:text-center text-4xl mb-10 lg:mb-15 text-left">
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="lg:text-center text-4xl mb-10 lg:mb-15 text-left"
+      >
         Technologies
-      </h1>
-      <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-10 gap-6 justify-items-center">
+      </motion.h1>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-10 gap-6 justify-items-center"
+      >
         {technologies.map((tech, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.05 }}
             className=" flex flex-col items-center gap-3 px-4 py-4 lg:py-0 rounded-xl  transition-all duration-300 hover:scale-105"
           >
             <div className={tech.color}>{tech.icon}</div>
             <span className="font-light tracking-tighter text-neutral-300 text-sm">
               {tech.name}
             </span>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

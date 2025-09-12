@@ -1,4 +1,5 @@
 import { PROJECTS } from "../constants";
+import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import SectionTitle from "./SectionTitle";
 
@@ -9,14 +10,23 @@ const Projects = () => {
         title="Projects"
         subtitle="A showcase of my recent work and contributions"
       />
-      <div className="space-y-4 lg:space-y-6">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="space-y-4 lg:space-y-6"
+      >
         {PROJECTS.map((project, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 lg:p-8 hover:border-neutral-700 transition-colors duration-300"
           >
             <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full">
-              {/* Image container */}
               <div className="w-full lg:w-1/2 aspect-[893/475] overflow-hidden rounded-xl border border-neutral-800">
                 <img
                   src={project.image}
@@ -25,19 +35,15 @@ const Projects = () => {
                 />
               </div>
 
-              {/* Content section */}
               <div className="w-full lg:w-1/2 space-y-3 flex flex-col justify-center">
-                {/* Title */}
                 <h3 className="text-white font-medium text-lg text-left">
                   {project.title}
                 </h3>
 
-                {/* Description */}
                 <p className="text-neutral-400 text-sm text-left leading-relaxed">
                   {project.description}
                 </p>
 
-                {/* Tech stack */}
                 <div className="flex flex-wrap gap-1.5">
                   {project.technologies?.map((tech, techIndex) => (
                     <span
@@ -49,7 +55,6 @@ const Projects = () => {
                   ))}
                 </div>
 
-                {/* Links section */}
                 {(project.github || project.demo) && (
                   <div className="flex gap-4 text-xs">
                     {project.github && (
@@ -78,9 +83,9 @@ const Projects = () => {
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

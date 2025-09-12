@@ -1,5 +1,6 @@
 import React from "react";
 import { EXPERIENCES } from "../constants";
+import { motion } from "framer-motion";
 import SectionTitle from "./SectionTitle";
 
 const Experience = () => {
@@ -9,14 +10,23 @@ const Experience = () => {
         title="Experience"
         subtitle="My professional journey and career highlights"
       />
-      <div className="space-y-4 lg:space-y-6 text-left">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="space-y-4 lg:space-y-6 text-left"
+      >
         {EXPERIENCES.map((exp, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 lg:p-8 hover:border-neutral-700 transition-colors duration-300"
           >
             <div className="space-y-4">
-              {/* Header section with year, role, and company */}
               <div className="space-y-2">
                 <p className="text-xs text-neutral-500 font-medium uppercase tracking-wider">
                   {exp.year}
@@ -32,12 +42,10 @@ const Experience = () => {
                 </a>
               </div>
 
-              {/* Description */}
               <p className="text-neutral-400 text-sm leading-relaxed">
                 {exp.description}
               </p>
 
-              {/* Tech stack */}
               <div className="flex flex-wrap gap-1.5 pt-2">
                 {exp.technologies?.map((tech, techIndex) => (
                   <span
@@ -49,9 +57,9 @@ const Experience = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
