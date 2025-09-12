@@ -1,22 +1,23 @@
 import profilePic from "../assets/dev-nobg.png";
 import { HERO_CONTENT } from "../constants";
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const container = (delay) => ({
-  hidden: { x: -100, opacity: 0 },
+  hidden: { x: -50, opacity: 0 },
   visible: {
     x: 0,
     opacity: 1,
     transition: {
       duration: 0.5,
       delay: delay,
+      ease: "easeOut"
     },
   },
 });
 
 const Hero = () => {
   return (
-    <div className="text-left flex flex-col lg:flex-row items-center lg:items-center lg:justify-between mb-16 lg:mb-20 gap-y-8">
+    <div className="text-left flex flex-col lg:flex-row items-center lg:items-center lg:justify-between mb-16 lg:mb-20 gap-y-8" style={{transform: 'translateZ(0)'}}>
       <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start">
         <motion.h1
           variants={container(0)}
@@ -48,10 +49,10 @@ const Hero = () => {
       <div className="w-full lg:w-1/2">
         <div className="flex justify-center lg:justify-end">
           <motion.div
-            initial={{ x: 100, opacity: 0 }}
+            initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="relative w-full  aspect-square lg:w-[80%] lg:h-auto lg:max-w-lg"
+            transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+            className="relative w-full aspect-square lg:w-[80%] lg:h-auto lg:max-w-lg"
           >
             {/* Main image container */}
             <div className="relative  rounded-full  w-full h-full">
