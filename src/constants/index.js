@@ -2,6 +2,7 @@ import project1 from "../assets/projects/project-1.png";
 import project2 from "../assets/projects/project-2.png";
 import project3 from "../assets/projects/project-3.png";
 import project4 from "../assets/projects/project-4.png";
+import project5 from "../assets/projects/project-5.png";
 
 export const HERO_CONTENT = `I craft responsive, SEO-friendly, and scalable web applications using React, TypeScript, and modern frameworks. With 3+ years of experience, I specialize in building HR systems, e-commerce platforms, and business websites that combine performance with great user experience.`;
 
@@ -47,6 +48,22 @@ export const PROJECTS = [
     github: "https://github.com/thuyainsoe/inventory-management",
   },
   {
+    title: "Fototapety",
+    image: project5,
+    description:
+      "An e-commerce platform for selling wallpapers and stickers, featuring product browsing, checkout, and secure payment integration for a smooth shopping experience.",
+    technologies: ["NextJS", "TypeScript", "Tailwind", "Laravel", "MySQL"],
+    demo: "https://fototapety-one.vercel.app/",
+  },
+  {
+    title: "Uni China",
+    image: project3,
+    description:
+      "Contributed to the UI development of a corporate site showcasing Uni-China Group’s 25-year business presence across retail, food trading, and F&B. Focused on responsive design, clean layout, and modern frontend practices",
+    technologies: ["HTML", "CSS", "Wordpress", "Javascript", "PHP"],
+    demo: "https://uni-china.com/",
+  },
+  {
     title: "E-Commerce Website",
     image: project1,
     description:
@@ -63,14 +80,6 @@ export const PROJECTS = [
     technologies: ["HTML", "CSS", "React", "Tailwind CSS"],
     github: "https://github.com/thuyainsoe/nft-marketplace",
     demo: "https://nft-marketplace-psi-rouge.vercel.app/",
-  },
-  {
-    title: "Uni China",
-    image: project3,
-    description:
-      "Contributed to the UI development of a corporate site showcasing Uni-China Group’s 25-year business presence across retail, food trading, and F&B. Focused on responsive design, clean layout, and modern frontend practices",
-    technologies: ["HTML", "CSS", "Wordpress", "Javascript", "PHP"],
-    demo: "https://uni-china.com/",
   },
   // {
   //   title: "Portfolio Website",
