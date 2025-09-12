@@ -1,5 +1,4 @@
 import { PROJECTS } from "../constants";
-import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import SectionTitle from "./SectionTitle";
 
@@ -10,20 +9,10 @@ const Projects = () => {
         title="Projects"
         subtitle="A showcase of my recent work and contributions"
       />
-      <motion.div
-        initial={{ y: 50 }}
-        whileInView={{ y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-        className="space-y-4 lg:space-y-6"
-      >
+      <div className="space-y-4 lg:space-y-6">
         {PROJECTS.map((project, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ y: 30, scale: 0.95 }}
-            whileInView={{ y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
             className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 lg:p-8 hover:border-neutral-700 transition-colors duration-300"
           >
             <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full">
@@ -89,9 +78,9 @@ const Projects = () => {
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
