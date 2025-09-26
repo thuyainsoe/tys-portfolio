@@ -196,3 +196,13 @@ body {
     background-position: 0% 50%;
   }
 }
+
+/* Top triangle */
+.clip-triangle-top {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+/* Bottom triangle */
+.clip-triangle-bottom {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}

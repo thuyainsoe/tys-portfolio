@@ -79,11 +79,7 @@ const Experience = () => {
     );
 
     // 4. Animate the "Visible One" section in from the left, which also pushes the "Better HR" section out
-    tl.to(
-      ".work-hr",
-      { xPercent: -100, duration: 1.5, ease: "power3.in" },
-      "2.5"
-    );
+    tl.to(".work-hr", { xPercent: 0, duration: 1.5, ease: "power3.in" }, "2.5");
     tl.to(
       ".work-visible",
       { xPercent: 0, duration: 1.5, ease: "power3.out" },
@@ -111,10 +107,19 @@ const Experience = () => {
         </div>
       </div>
 
-      {/* Layer 1: Main Title */}
-      <div className="experience-title-container absolute inset-0 z-10 flex-center bg-white">
-        <div className="special-font text-center font-zentry text-7xl font-black uppercase !text-black sm:right-10 sm:text-9xl md:text-8xl lg:text-[10rem]">
-          Exp<b>e</b>rie<b>nc</b>e
+      <div className="experience-title-container absolute inset-0 z-10 flex-center">
+        {/* Top Triangle */}
+        <div className="absolute inset-0 bg-black clip-triangle-top flex-center">
+          <div className="special-font text-center font-zentry text-7xl font-black uppercase !text-[#1ed292] sm:right-10 sm:text-9xl md:text-8xl lg:text-[10rem]">
+            Exp<b>e</b>rie<b>nc</b>e
+          </div>
+        </div>
+
+        {/* Bottom Triangle */}
+        <div className="absolute inset-0 bg-black clip-triangle-bottom flex-center">
+          <div className="special-font text-center font-zentry text-7xl font-black uppercase !text-[#ffae00] sm:right-10 sm:text-9xl md:text-8xl lg:text-[10rem]">
+            Exp<b>e</b>rie<b>nc</b>e
+          </div>
         </div>
       </div>
 

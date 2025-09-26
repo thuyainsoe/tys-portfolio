@@ -1,6 +1,7 @@
 import About from "./components/About";
 import Experience from "./components/Experience";
 import Hero from "./components/Hero";
+import Education from "./components/Education";
 
 const App = () => {
   return (
@@ -8,7 +9,7 @@ const App = () => {
       <Hero />
       <About />
       <Experience />
-      <div className="h-screen w-screen "></div>
+      <Education />
     </main>
   );
 };
