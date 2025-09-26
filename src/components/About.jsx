@@ -103,7 +103,7 @@ const About = () => {
         />
       </div>
 
-      <div className="h-[100vh] w-screen" id="clip">
+      <div className="min-h-dvh w-screen" id="clip">
         <div className="scroll-progress-bar absolute top-0 left-0 z-30 h-1 w-full origin-left scale-x-0 bg-accent-red" />
 
         <div className="mask-clip-path about-image">

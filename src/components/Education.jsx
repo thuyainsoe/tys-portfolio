@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Updated education details from your request
 const educationData = {
-  school: "University Of Computer Studies, Yangon",
+  school: "University Of Computer Studies,Yangon",
   degree: "Bachelor of Computer Science (B.C.Sc)",
   duration: "2018 - 2023",
   description:
@@ -112,25 +112,25 @@ const Education = () => {
         <div className="relative z-10 flex h-full w-full flex-col justify-center p-8 md:p-16 lg:p-24">
           <div className="max-w-4xl text-left">
             <div className="mb-8">
-              <h2 className="special-font font-zentry tracking-wide  edu-school font-black uppercase text-white text-4xl md:text-6xl">
+              <h2 className="special-font font-general tracking-tight  edu-school font-black text-white text-3xl md:text-6xl">
                 {educationData.school}
               </h2>
-              <p className="special-font edu-degree mt-2 text-lg uppercase text-blue-300 md:text-2xl">
+              <div className="special-font edu-degree mt-4 text-base uppercase text-blue-300 md:text-2xl">
                 {educationData.degree}
-              </p>
+              </div>
               <p className="font-robert-regular edu-duration mt-1 text-lg text-gray-400">
                 {educationData.duration}
               </p>
             </div>
             <div>
-              <p className="font-robert-regular edu-description text-base text-white md:text-lg">
+              <p className="font-robert-regular edu-description text-sm md:text-base text-white">
                 {educationData.description}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {educationData.subjects.map((subject, index) => (
                   <span
                     key={index}
-                    className="edu-subject rounded-full bg-blue-900/50 px-3 py-1 text-sm font-medium text-blue-300"
+                    className="edu-subject rounded-full bg-blue-900/50 px-3 py-1 text-xs md:text-sm font-medium text-blue-300"
                   >
                     {subject}
                   </span>
