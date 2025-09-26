@@ -5,12 +5,11 @@ import AnimatedTitle from "./AnimatedTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Data for each section
+// Data for each section - simplified for the new design
 const sectionsData = [
-  // ... (your sectionsData array is unchanged)
   {
     id: 1,
-    bgColor: "bg-[#1D2D44]",
+    bgColor: "bg-black",
     textColor: "text-white",
     title: "My Journey / Background",
     content:
@@ -18,31 +17,31 @@ const sectionsData = [
   },
   {
     id: 2,
-    bgColor: "bg-[#3E5C76]",
-    textColor: "text-white",
+    bgColor: "bg-white",
+    textColor: "text-black",
     title: "Values & Mindset",
     content:
       "I believe in clean code, collaborative teamwork, and building products that solve real problems while creating delightful user experiences.",
   },
   {
     id: 3,
-    bgColor: "bg-[#F0EBD8]",
-    textColor: "text-slate-900",
+    bgColor: "bg-black",
+    textColor: "text-white",
     title: "What I’m Learning / Future Goals",
     content:
       "I’m currently diving deeper into Three.js and AI-powered frontend experiences to push the boundaries of interactive design.",
   },
   {
     id: 4,
-    bgColor: "bg-[#748CAB]",
-    textColor: "text-white",
+    bgColor: "bg-white",
+    textColor: "text-black",
     title: "Testimonials / Collaborations",
     content:
       "I’ve collaborated with startups, SaaS platforms, and e-commerce companies to ship high-impact products.",
   },
   {
     id: 5,
-    bgColor: "bg-[#5E3B5D]",
+    bgColor: "bg-black",
     textColor: "text-white",
     title: "Fun Facts",
     content:
@@ -51,24 +50,20 @@ const sectionsData = [
 ];
 
 const About = () => {
+  // The GSAP animation logic remains the same
   useGSAP(() => {
-    // --- INITIAL STATES (Unchanged) ---
-    sectionsData.forEach((section) => {
-      gsap.set(`.about-content-wrapper-${section.id}`, { opacity: 0 });
-      gsap.set(`.about-text-content-${section.id}`, { x: "100%" });
+    gsap.set(".horizontal-scroll-wrapper", { opacity: 0 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#clip",
+        start: "center center",
+        end: "+=5000",
+        scrub: 1,
+        pin: true,
+        pinSpacing: true,
+      },
     });
-
-    const scrollTriggerConfig = {
-      trigger: "#clip",
-      start: "center center",
-      end: "+=5000",
-      scrub: 0.8,
-      pin: true,
-      pinSpacing: true,
-    };
-
-    // --- MAIN TIMELINE ---
-    const tl = gsap.timeline({ scrollTrigger: scrollTriggerConfig });
 
     tl.to(".mask-clip-path", {
       width: "100vw",
@@ -76,63 +71,30 @@ const About = () => {
       borderRadius: 0,
       ease: "power2.inOut",
     });
-    tl.to(".about-content-wrapper-1", { opacity: 1, ease: "power2.inOut" });
 
-    // ✨ CHANGED: Added elastic ease and duration for the first section's entrance
-    tl.to(
-      ".about-text-content-1",
-      {
-        x: "0%",
-        ease: "elastic.out(1, 0.5)",
-        duration: 1.5,
-      },
-      "<"
-    );
-
-    sectionsData.slice(0, -1).forEach((section) => {
-      const currentId = section.id;
-      const nextId = currentId + 1;
-
-      // Animate OUT (Unchanged)
-      tl.to(`.about-text-content-${currentId}`, {
-        x: "-100%",
-        ease: "power2.inOut",
-      });
-      tl.to(
-        `.about-content-wrapper-${currentId}`,
-        { opacity: 0, ease: "power2.inOut" },
-        "<"
-      );
-
-      // Animate IN the next wrapper (Unchanged)
-      tl.to(
-        `.about-content-wrapper-${nextId}`,
-        { opacity: 1, ease: "power2.inOut" },
-        "<"
-      );
-
-      // ✨ CHANGED: Added elastic ease and duration for all subsequent section entrances
-      tl.to(
-        `.about-text-content-${nextId}`,
-        {
-          x: "0%",
-          ease: "elastic.out(1, 0.5)",
-          duration: 1.5,
-        },
-        "<"
-      );
+    tl.to(".horizontal-scroll-wrapper", {
+      opacity: 1,
+      ease: "power1.inOut",
     });
 
-    // --- PROGRESS BAR (Unchanged) ---
+    tl.to(".sections-filmstrip", {
+      x: () => `-${(sectionsData.length - 1) * 100}vw`,
+      ease: "none",
+    });
+
     gsap.to(".scroll-progress-bar", {
       scaleX: 1,
       ease: "none",
-      scrollTrigger: { ...scrollTriggerConfig, pin: false },
+      scrollTrigger: {
+        trigger: "#clip",
+        start: "center center",
+        end: "+=5000",
+        scrub: 1,
+      },
     });
   }, []);
 
   return (
-    // ... (your JSX is unchanged)
     <div id="about" className="min-h-screen w-screen">
       <div className="relative mb-8 mt-36 flex flex-col items-center gap-5">
         <AnimatedTitle
@@ -141,8 +103,8 @@ const About = () => {
         />
       </div>
 
-      <div className="h-[100vh] w-screen" id="clip">
-        <div className="scroll-progress-bar absolute top-0 left-0 z-30 h-1 w-full origin-left scale-x-0 bg-white" />
+      <div className="h-dvh w-screen" id="clip">
+        <div className="scroll-progress-bar absolute top-0 left-0 z-30 h-1 w-full origin-left scale-x-0 bg-accent-red" />
 
         <div className="mask-clip-path about-image">
           <img
@@ -150,24 +112,44 @@ const About = () => {
             alt="Thurein Soe"
             className="absolute left-0 top-0 size-full object-cover"
           />
-          <div className="absolute inset-0 z-10 bg-black opacity-40"></div>
         </div>
 
-        {sectionsData.map((section) => (
+        <div className="horizontal-scroll-wrapper absolute top-0 left-0 z-20 size-full overflow-hidden">
           <div
-            key={section.id}
-            className={`about-content-wrapper-${section.id} absolute-center z-20 flex-center size-full overflow-hidden ${section.bgColor}`}
+            className="sections-filmstrip flex h-full"
+            style={{ width: `${sectionsData.length * 100}%` }}
           >
-            <div
-              className={`about-text-content-${section.id} max-w-5xl px-8 ${section.textColor}`}
-            >
-              <h2 className="bento-title mb-6">{section.title}</h2>
-              <p className="font-robert-regular text-lg md:text-xl">
-                {section.content}
-              </p>
-            </div>
+            {/* ✨ UPDATED: Section structure refactored for typographical decoration */}
+            {sectionsData.map((section) => (
+              <div
+                key={section.id}
+                className={`relative h-full w-screen shrink-0 flex-center overflow-hidden p-8 ${section.bgColor}`}
+              >
+                {/* Background Decoration: Large, semi-transparent number */}
+                <div
+                  aria-hidden="true"
+                  className={`special-font absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter opacity-10 ${
+                    section.textColor === "text-white"
+                      ? "text-white"
+                      : "text-black"
+                  }`}
+                >
+                  0{section.id}
+                </div>
+
+                {/* Foreground Content */}
+                <div
+                  className={`relative z-10 max-w-4xl text-center ${section.textColor}`}
+                >
+                  <h2 className="bento-title mb-6">{section.title}</h2>
+                  <p className="font-robert-regular text-lg md:text-xl">
+                    {section.content}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
