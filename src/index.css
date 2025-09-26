@@ -95,6 +95,10 @@ body {
     @apply uppercase font-zentry font-black text-5xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
   }
 
+  .hero-subheading {
+    @apply text-6xl uppercase leading-[.8] text-white  md:text-[6rem];
+  }
+
   .about-subtext {
     @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular text-lg md:max-w-[34rem];
   }
