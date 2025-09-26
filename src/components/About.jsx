@@ -99,7 +99,7 @@ const About = () => {
       <div className="relative mb-8 mt-36 flex flex-col items-center gap-5">
         <AnimatedTitle
           title="Ab<b>o</b>ut <b>Me</b>"
-          containerClass="mt-5 !text-black text-center hero-heading special-font"
+          containerClass="mt-3 !text-black text-center hero-heading special-font"
         />
       </div>
 
