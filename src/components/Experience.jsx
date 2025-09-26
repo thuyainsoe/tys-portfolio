@@ -8,9 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 const Experience = () => {
   useGSAP(() => {
     // --- INITIAL STATES ---
-    gsap.set(".experience-title-container", { yPercent: -100, scale: 1 });
+    gsap.set(".experience-title-container", { yPercent: 100, scale: 1 });
     gsap.set(".work-hr", { xPercent: 100 });
-    gsap.set(".work-visible", { xPercent: 100 });
+    gsap.set(".work-visible", { xPercent: -100 });
 
     // --- MAIN TIMELINE ---
     const tl = gsap.timeline({
@@ -24,13 +24,15 @@ const Experience = () => {
     });
 
     // Animate the progress bar in sync with the timeline
-    tl.to(".scroll-progress-bar", { scaleX: 1, ease: "none" }, 0);
 
     // Sequence of page animations
-    tl.to(".experience-content", { xPercent: -100, ease: "power2.inOut" }, "<");
+    // Content animation starts
+    tl.to(".experience-content", { xPercent: 0, ease: "power2.inOut" }, "<");
+
+    // Title animation starts 0.5 seconds LATER
     tl.to(
       ".experience-title-container",
-      { yPercent: 0, scale: 1.25, ease: "power3.out" },
+      { yPercent: 0, scale: 1, ease: "power3.out" },
       "<"
     );
     tl.to(
@@ -38,11 +40,7 @@ const Experience = () => {
       { xPercent: 0, duration: 1.5, ease: "power3.out" },
       "0.6"
     );
-    tl.to(
-      ".work-hr",
-      { xPercent: -100, duration: 1.5, ease: "power3.in" },
-      "2.5"
-    );
+    tl.to(".work-hr", { xPercent: 0, duration: 1.5, ease: "power3.in" }, "2.5");
     tl.to(
       ".work-visible",
       { xPercent: 0, duration: 1.5, ease: "power3.out" },
@@ -72,10 +70,9 @@ const Experience = () => {
 
       {/* Title (z-10) */}
       <div className="experience-title-container absolute inset-0 z-10 flex-center bg-white">
-        <AnimatedTitle
-          title="Exp<b>e</b>rie<b>nc</b>e"
-          containerClass="!text-black text-center hero-heading special-font"
-        />
+        <div className="!text-black text-center uppercase font-zentry font-black text-7xl sm:right-10 sm:text-9xl md:text-8xl lg:text-[10rem] special-font">
+          Exp<b>e</b>rie<b>nc</b>e
+        </div>
       </div>
 
       {/* Better HR (z-20) */}
