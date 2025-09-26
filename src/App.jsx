@@ -8,7 +8,7 @@ const App = () => {
       <Hero />
       <About />
       <Experience />
-      <div className="h-screen w-screen bg-blue-100"></div>
+      <div className="h-screen w-screen "></div>
     </main>
   );
 };
