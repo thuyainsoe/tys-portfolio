@@ -88,7 +88,7 @@ const About = () => {
       scrollTrigger: {
         trigger: "#clip",
         start: "center center",
-        end: "+=5000",
+        end: "+=1500",
         scrub: 1,
       },
     });
