@@ -72,7 +72,7 @@ const About = () => {
 
     tl.to(".mask-clip-path", {
       width: "100vw",
-      height: "100dvh",
+      height: "100vh",
       borderRadius: 0,
       ease: "power2.inOut",
     });
@@ -141,7 +141,7 @@ const About = () => {
         />
       </div>
 
-      <div className="h-dvh w-screen" id="clip">
+      <div className="h-[100vh] w-screen" id="clip">
         <div className="scroll-progress-bar absolute top-0 left-0 z-30 h-1 w-full origin-left scale-x-0 bg-white" />
 
         <div className="mask-clip-path about-image">
