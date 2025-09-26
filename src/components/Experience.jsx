@@ -30,7 +30,7 @@ const Experience = () => {
     tl.to(".experience-content", { xPercent: -100, ease: "power2.inOut" }, "<");
     tl.to(
       ".experience-title-container",
-      { yPercent: 0, scale: 1.5, ease: "power3.out" },
+      { yPercent: 0, scale: 1.25, ease: "power3.out" },
       "<"
     );
     tl.to(
