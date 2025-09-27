@@ -49,6 +49,7 @@ const Experience = () => {
     gsap.set(".work-visible", { opacity: 0 });
     gsap.set(".work-hr .content-panel", { xPercent: -100 });
     gsap.set(".work-visible .content-panel", { xPercent: -100 });
+    gsap.set([".bh-skill", ".vo-skill"], { opacity: 0 }); // Skill tags are faded in
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -56,7 +57,7 @@ const Experience = () => {
         pin: true,
         start: "top top",
         end: "+=4000",
-        scrub: 0.6,
+        scrub: 1, // Set to 1 for a direct link between scroll and animation
       },
     });
 
@@ -88,17 +89,13 @@ const Experience = () => {
       "-=0.5"
     );
 
-    // 3a. Staggered text animation for Better HR
-    tl.from(
+    // 3a. Karaoke text reveal animation for Better HR
+    tl.to(
       [".bh-company", ".bh-role", ".bh-duration", ".bh-desc"],
-      { opacity: 0, y: 30, stagger: 0.15, ease: "power3.out" },
+      { backgroundPosition: "0% 0", stagger: 0.2, ease: "none" },
       "-=0.2"
     );
-    tl.from(
-      ".bh-skill",
-      { opacity: 0, y: 20, stagger: 0.05, ease: "power3.out" },
-      "-=0.5"
-    );
+    tl.to(".bh-skill", { opacity: 1, stagger: 0.05 }, "-=0.5");
 
     // 4. Transition to "Visible One"
     tl.to(".work-hr", { opacity: 0, ease: "power3.in" }, "+=1.5");
@@ -109,17 +106,13 @@ const Experience = () => {
       "<"
     );
 
-    // 4a. Staggered text animation for Visible One
-    tl.from(
+    // 4a. Karaoke text reveal animation for Visible One
+    tl.to(
       [".vo-company", ".vo-role", ".vo-duration", ".vo-desc"],
-      { opacity: 0, y: 30, stagger: 0.15, ease: "power3.out" },
+      { backgroundPosition: "0% 0", stagger: 0.2, ease: "none" },
       "-=0.2"
     );
-    tl.from(
-      ".vo-skill",
-      { opacity: 0, y: 20, stagger: 0.05, ease: "power3.out" },
-      "-=0.5"
-    );
+    tl.to(".vo-skill", { opacity: 1, stagger: 0.05 }, "-=0.5");
   }, []);
 
   return (
@@ -127,7 +120,7 @@ const Experience = () => {
       id="experience"
       className="relative min-h-screen w-screen overflow-hidden"
     >
-      {/* Layer 0: Video background - always visible */}
+      {/* Layer 0: Video background */}
       <div className="experience-content absolute inset-0 text-center">
         <div className="mask-clip-path about-image">
           <video
@@ -156,7 +149,7 @@ const Experience = () => {
         </div>
       </div>
 
-      {/* Layer 2: Better HR Experience (Split-Screen & Dark Theme) */}
+      {/* Layer 2: Better HR Experience */}
       <div className="work-hr pointer-events-none absolute inset-0 z-20 w-full">
         <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-zinc-900 md:w-3/5">
           <div
@@ -169,20 +162,20 @@ const Experience = () => {
             <div className="max-w-4xl text-left">
               <div className="mb-8">
                 <div
-                  className="bh-company special-font text-left font-zentry text-7xl font-black uppercase !text-[#1ed292]"
+                  className="bh-company text-reveal text-reveal-bh special-font text-left font-zentry text-7xl font-black uppercase"
                   dangerouslySetInnerHTML={{
                     __html: betterHRData.companyHighlight,
                   }}
                 />
-                <p className="bh-role special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
+                <p className="bh-role text-reveal special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
                   {betterHRData.role}
                 </p>
-                <p className="bh-duration font-robert-regular mt-1 text-lg text-zinc-400">
+                <p className="bh-duration text-reveal font-robert-regular mt-1 text-lg text-zinc-400">
                   {betterHRData.duration}
                 </p>
               </div>
               <div>
-                <p className="bh-desc font-robert-regular text-base text-zinc-300 md:text-lg">
+                <p className="bh-desc text-reveal font-robert-regular text-base text-zinc-300 md:text-lg">
                   {betterHRData.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -201,7 +194,7 @@ const Experience = () => {
         </div>
       </div>
 
-      {/* Layer 3: Visible One Experience (Split-Screen & Dark Theme) */}
+      {/* Layer 3: Visible One Experience */}
       <div className="work-visible pointer-events-none absolute inset-0 z-30 w-full">
         <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-zinc-900 md:w-3/5">
           <div
@@ -214,20 +207,20 @@ const Experience = () => {
             <div className="max-w-4xl text-left">
               <div className="mb-8">
                 <div
-                  className="vo-company special-font text-left font-zentry text-7xl font-black uppercase !text-[#ffae00]"
+                  className="vo-company text-reveal text-reveal-vo special-font text-left font-zentry text-7xl font-black uppercase"
                   dangerouslySetInnerHTML={{
                     __html: visibleOneData.companyHighlight,
                   }}
                 />
-                <p className="vo-role special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
+                <p className="vo-role text-reveal special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
                   {visibleOneData.role}
                 </p>
-                <p className="vo-duration font-robert-regular mt-1 text-lg text-zinc-400">
+                <p className="vo-duration text-reveal font-robert-regular mt-1 text-lg text-zinc-400">
                   {visibleOneData.duration}
                 </p>
               </div>
               <div>
-                <p className="vo-desc font-robert-regular text-base text-zinc-300 md:text-lg">
+                <p className="vo-desc text-reveal font-robert-regular text-base text-zinc-300 md:text-lg">
                   {visibleOneData.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -245,6 +238,8 @@ const Experience = () => {
           </div>
         </div>
       </div>
+
+      {/* UX Layer: Scroll down indicator */}
     </div>
   );
 };

@@ -210,3 +210,28 @@ body {
 .clip-triangle-bottom {
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
 }
+
+.text-reveal {
+  /* Gradient background (after color 50%, before color 50%).
+    We use zinc-200 for the final white-ish color and zinc-600 for the initial gray color.
+  */
+  background-image: linear-gradient(to right, #e4e4e7 50%, #52525b 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0; /* Start from the right (showing only the "before" color) */
+
+  /* Crucial properties to clip the background to the text shape */
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+
+  /* Make the actual text color transparent */
+  color: transparent;
+}
+
+/* We need a separate class for brand colors */
+.text-reveal-bh {
+  background-image: linear-gradient(to right, #1ed292 50%, #52525b 50%);
+}
+.text-reveal-vo {
+  background-image: linear-gradient(to right, #ffae00 50%, #52525b 50%);
+}
