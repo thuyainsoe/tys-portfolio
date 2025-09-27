@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const sectionsData = [
   {
     id: 1,
-    bgColor: "bg-black",
+    bgColor: "bg-zinc-900",
     textColor: "text-white",
     title: "My Journey / Background",
     content:
@@ -25,7 +25,7 @@ const sectionsData = [
   },
   {
     id: 3,
-    bgColor: "bg-black",
+    bgColor: "bg-zinc-900",
     textColor: "text-white",
     title: "What I’m Learning / Future Goals",
     content:
@@ -41,7 +41,7 @@ const sectionsData = [
   },
   {
     id: 5,
-    bgColor: "bg-black",
+    bgColor: "bg-zinc-900",
     textColor: "text-white",
     title: "Fun Facts",
     content:
