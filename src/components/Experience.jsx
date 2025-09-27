@@ -1,9 +1,10 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
+
 gsap.registerPlugin(ScrollTrigger);
 
-// Data remains the same
+// Data for the work experiences
 const betterHRData = {
   id: 1,
   companyHighlight: "Better <b>H</b>R",
@@ -44,11 +45,9 @@ const Experience = () => {
   useGSAP(() => {
     // --- INITIAL STATES ---
     gsap.set(".experience-content", { xPercent: -50, opacity: 0 });
-    // ✨ MODIFIED: Experience sections start invisible
-    // gsap.set(".work-hr", { opacity: 0 });
-    // gsap.set(".work-visible", { opacity: 0 });
-    // ✨ NEW: Animate the content panels from the side
-    // gsap.set(".work-hr .content-panel", { xPercent: -100 });
+    gsap.set(".work-hr", { opacity: 0 });
+    gsap.set(".work-visible", { opacity: 0 });
+    gsap.set(".work-hr .content-panel", { xPercent: -100 });
     gsap.set(".work-visible .content-panel", { xPercent: -100 });
 
     const tl = gsap.timeline({
@@ -81,37 +80,56 @@ const Experience = () => {
       "<"
     );
 
-    // ✨ MODIFIED: Reveal the "Better HR" section
-    // First, fade in the main container (which is transparent)
+    // 3. Reveal the "Better HR" section
     tl.to(".work-hr", { opacity: 1 }, "-=0.5");
-    // Then, slide in the colored content panel from the left
     tl.to(
       ".work-hr .content-panel",
       { xPercent: 0, ease: "power3.out" },
       "-=0.5"
     );
 
+    // 3a. Staggered text animation for Better HR
+    tl.from(
+      [".bh-company", ".bh-role", ".bh-duration", ".bh-desc"],
+      { opacity: 0, y: 30, stagger: 0.15, ease: "power3.out" },
+      "-=0.2"
+    );
+    tl.from(
+      ".bh-skill",
+      { opacity: 0, y: 20, stagger: 0.05, ease: "power3.out" },
+      "-=0.5"
+    );
+
     // 4. Transition to "Visible One"
-    // Fade out the first section
     tl.to(".work-hr", { opacity: 0, ease: "power3.in" }, "+=1.5");
-    // Fade in the second section
     tl.to(".work-visible", { opacity: 1, ease: "power3.out" }, "<");
-    // Slide in the second section's content panel
     tl.to(
       ".work-visible .content-panel",
       { xPercent: 0, ease: "power3.out" },
       "<"
+    );
+
+    // 4a. Staggered text animation for Visible One
+    tl.from(
+      [".vo-company", ".vo-role", ".vo-duration", ".vo-desc"],
+      { opacity: 0, y: 30, stagger: 0.15, ease: "power3.out" },
+      "-=0.2"
+    );
+    tl.from(
+      ".vo-skill",
+      { opacity: 0, y: 20, stagger: 0.05, ease: "power3.out" },
+      "-=0.5"
     );
   }, []);
 
   return (
     <div
       id="experience"
-      className="relative min-h-screen w-screen overflow-hidden pt-36"
+      className="relative min-h-screen w-screen overflow-hidden"
     >
       {/* Layer 0: Video background - always visible */}
       <div className="experience-content absolute inset-0 text-center">
-        {/* <div className="mask-clip-path about-image">
+        <div className="mask-clip-path about-image">
           <video
             src={"/videos/experience.mp4"}
             autoPlay
@@ -121,7 +139,7 @@ const Experience = () => {
             className="absolute left-0 top-0 z-0 size-full object-cover object-[70%] md:object-center"
           />
           <div className="absolute inset-0 bg-black opacity-40"></div>
-        </div> */}
+        </div>
       </div>
 
       {/* Layer 1: The Title "Doors" */}
@@ -138,10 +156,9 @@ const Experience = () => {
         </div>
       </div>
 
-      {/* Layer 2: Better HR Experience (Updated Colors) */}
+      {/* Layer 2: Better HR Experience (Split-Screen & Dark Theme) */}
       <div className="work-hr pointer-events-none absolute inset-0 z-20 w-full">
-        {/* ✨ MODIFIED: Changed background to a dark charcoal color */}
-        <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-zinc-900">
+        <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-zinc-900 md:w-3/5">
           <div
             aria-hidden="true"
             className="special-font absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter text-white opacity-5"
@@ -151,30 +168,28 @@ const Experience = () => {
           <div className="relative z-10 flex h-full w-full flex-col justify-center p-8 md:p-16 lg:p-24">
             <div className="max-w-4xl text-left">
               <div className="mb-8">
-                {/* ✨ MODIFIED: Company name now uses the brand color as an accent */}
                 <div
-                  className="special-font text-left font-zentry text-7xl font-black uppercase !text-[#1ed292]"
+                  className="bh-company special-font text-left font-zentry text-7xl font-black uppercase !text-[#1ed292]"
                   dangerouslySetInnerHTML={{
                     __html: betterHRData.companyHighlight,
                   }}
                 />
-                {/* Other text remains white or light gray for readability */}
-                <p className="special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
+                <p className="bh-role special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
                   {betterHRData.role}
                 </p>
-                <p className="font-robert-regular mt-1 text-lg text-zinc-400">
+                <p className="bh-duration font-robert-regular mt-1 text-lg text-zinc-400">
                   {betterHRData.duration}
                 </p>
               </div>
               <div>
-                <p className="font-robert-regular text-base text-zinc-300 md:text-lg">
+                <p className="bh-desc font-robert-regular text-base text-zinc-300 md:text-lg">
                   {betterHRData.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {betterHRData.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full bg-zinc-800 px-3 py-1 text-sm font-medium text-zinc-300"
+                      className="bh-skill rounded-full bg-zinc-800 px-3 py-1 text-sm font-medium text-zinc-300"
                     >
                       {skill}
                     </span>
@@ -186,10 +201,9 @@ const Experience = () => {
         </div>
       </div>
 
-      {/* Layer 3: Visible One Experience (Updated Colors) */}
+      {/* Layer 3: Visible One Experience (Split-Screen & Dark Theme) */}
       <div className="work-visible pointer-events-none absolute inset-0 z-30 w-full">
-        {/* ✨ MODIFIED: Using the same dark background for consistency */}
-        <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-zinc-900">
+        <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-zinc-900 md:w-3/5">
           <div
             aria-hidden="true"
             className="special-font absolute -bottom-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter text-white opacity-5"
@@ -199,29 +213,28 @@ const Experience = () => {
           <div className="relative z-10 flex h-full w-full flex-col justify-center p-8 md:p-16 lg:p-24">
             <div className="max-w-4xl text-left">
               <div className="mb-8">
-                {/* ✨ MODIFIED: Company name now uses the brand color as an accent */}
                 <div
-                  className="special-font text-left font-zentry text-7xl font-black uppercase !text-[#ffae00]"
+                  className="vo-company special-font text-left font-zentry text-7xl font-black uppercase !text-[#ffae00]"
                   dangerouslySetInnerHTML={{
                     __html: visibleOneData.companyHighlight,
                   }}
                 />
-                <p className="special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
+                <p className="vo-role special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
                   {visibleOneData.role}
                 </p>
-                <p className="font-robert-regular mt-1 text-lg text-zinc-400">
+                <p className="vo-duration font-robert-regular mt-1 text-lg text-zinc-400">
                   {visibleOneData.duration}
                 </p>
               </div>
               <div>
-                <p className="font-robert-regular text-base text-zinc-300 md:text-lg">
+                <p className="vo-desc font-robert-regular text-base text-zinc-300 md:text-lg">
                   {visibleOneData.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {visibleOneData.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full bg-zinc-800 px-3 py-1 text-sm font-medium text-zinc-300"
+                      className="vo-skill rounded-full bg-zinc-800 px-3 py-1 text-sm font-medium text-zinc-300"
                     >
                       {skill}
                     </span>
