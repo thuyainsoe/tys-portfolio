@@ -160,22 +160,26 @@ const Experience = () => {
                     __html: betterHRData.companyHighlight,
                   }}
                 />
-                <p className="bh-role text-reveal special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
+                {/* Use text-reveal for the role as well for a strong headline effect */}
+                <p className="bh-role text-reveal text-reveal-bh special-font mt-2 text-2xl uppercase md:text-4xl">
                   {betterHRData.role}
                 </p>
-                <p className="bh-duration text-reveal font-robert-regular mt-1 text-lg text-zinc-400">
+                {/* Use semi-transparent white for secondary info */}
+                <p className="bh-duration font-robert-regular mt-1 text-lg text-white/70">
                   {betterHRData.duration}
                 </p>
               </div>
               <div>
-                <p className="bh-desc text-reveal font-robert-regular text-base text-zinc-300 md:text-lg">
+                {/* Use a slightly more opaque white for the main description */}
+                <p className="bh-desc font-robert-regular text-base text-white/90 md:text-lg">
                   {betterHRData.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {betterHRData.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="bh-skill rounded-full bg-zinc-800 px-3 py-1 text-sm font-medium text-zinc-300"
+                      /* Restyle skill tags for a modern, glassy look on the color background */
+                      className="bh-skill rounded-full bg-white/20 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm"
                     >
                       {skill}
                     </span>
@@ -205,22 +209,26 @@ const Experience = () => {
                     __html: visibleOneData.companyHighlight,
                   }}
                 />
-                <p className="vo-role text-reveal special-font mt-2 text-2xl uppercase text-zinc-300 md:text-4xl">
+                {/* Use text-reveal for the role */}
+                <p className="vo-role text-reveal text-reveal-vo special-font mt-2 text-2xl uppercase md:text-4xl">
                   {visibleOneData.role}
                 </p>
-                <p className="vo-duration text-reveal font-robert-regular mt-1 text-lg text-zinc-400">
+                {/* Use semi-transparent white for secondary info */}
+                <p className="vo-duration font-robert-regular mt-1 text-lg text-white/70">
                   {visibleOneData.duration}
                 </p>
               </div>
               <div>
-                <p className="vo-desc text-reveal font-robert-regular text-base text-zinc-300 md:text-lg">
+                {/* Use a slightly more opaque white for the main description */}
+                <p className="vo-desc font-robert-regular text-base text-white/90 md:text-lg">
                   {visibleOneData.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {visibleOneData.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="vo-skill rounded-full bg-zinc-800 px-3 py-1 text-sm font-medium text-zinc-300"
+                      /* Same glassy style for these skill tags */
+                      className="vo-skill rounded-full bg-white/20 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm"
                     >
                       {skill}
                     </span>
