@@ -10,8 +10,8 @@ const App = () => {
       <Hero />
       <About />
       <Experience />
-      <Education />
       <Projects />
+      <Education />
     </main>
   );
 };

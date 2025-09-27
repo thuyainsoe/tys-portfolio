@@ -98,7 +98,7 @@ const Experience = () => {
     tl.to(".bh-skill", { opacity: 1, stagger: 0.05 }, "-=0.5");
 
     // 4. Transition to "Visible One"
-    tl.to(".work-hr", { opacity: 0, ease: "power3.in" }, "+=1.5");
+    tl.to(".work-hr", { opacity: 0, ease: "power3.in" });
     tl.to(".work-visible", { opacity: 1, ease: "power3.out" }, "<");
     tl.to(
       ".work-visible .content-panel",

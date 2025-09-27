@@ -51,10 +51,10 @@ const projectsData = [
 ];
 
 // Reusable Project Card Component
-const ProjectCard = ({ project, className, children }) => (
+const ProjectCard = ({ className, children }) => (
   // ✨ RESPONSIVE: Full width & half height on mobile, half width & full height on desktop
   <div className={`w-full md:w-1/2 h-1/2 md:h-full p-2 md:p-4 ${className}`}>
-    <div className="flex h-full w-full flex-col p-4 md:p-6">{children}</div>
+    <div className="flex h-full w-full flex-col p-2">{children}</div>
   </div>
 );
 
@@ -70,7 +70,7 @@ const Projects = () => {
           isMobile: "(max-width: 767px)",
         },
         (context) => {
-          let { isDesktop, isMobile } = context.conditions;
+          let { isDesktop } = context.conditions;
 
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -83,14 +83,14 @@ const Projects = () => {
           });
 
           // --- Title Animation (Faster & improved UX) ---
-          tl.to(".projects-title", { opacity: 0, duration: 0.5 }, "<0.5");
+          tl.to(".projects-title", { opacity: 0, duration: 0.5 }, "<0.2");
 
           if (isDesktop) {
             // --- DESKTOP: Top/Bottom Entrance ---
-            gsap.set(".project-1", { yPercent: -100, opacity: 0 });
-            gsap.set(".project-2", { yPercent: 100, opacity: 0 });
-            gsap.set(".project-3", { yPercent: -100, opacity: 0 });
-            gsap.set(".project-4", { yPercent: 100, opacity: 0 });
+            gsap.set(".project-1", { yPercent: -100, opacity: 1 });
+            gsap.set(".project-2", { yPercent: 100, opacity: 1 });
+            gsap.set(".project-3", { yPercent: -100, opacity: 1 });
+            gsap.set(".project-4", { yPercent: 100, opacity: 1 });
             gsap.set(".screen-2", { xPercent: 100 });
 
             tl.to([".project-1", ".project-2"], {
@@ -106,15 +106,37 @@ const Projects = () => {
               ease: "none",
             });
 
-            tl.to(".screen-1", { xPercent: 0, ease: "power2.inOut" }, "+=1");
+            tl.to(".screen-1", { xPercent: 0, ease: "power2.inOut" });
             tl.to(".screen-2", { xPercent: 0, ease: "power2.inOut" }, "<");
 
-            tl.to([".project-3", ".project-4"], {
-              yPercent: 0,
+            tl.to([".project-1"], {
+              yPercent: 100,
               opacity: 1,
               stagger: 0.1,
               ease: "power2.out",
             });
+
+            tl.to(
+              [".project-2"],
+              {
+                yPercent: -100,
+                opacity: 1,
+                stagger: 0.1,
+                ease: "power2.out",
+              },
+              "<"
+            );
+
+            tl.to(
+              [".project-3", ".project-4"],
+              {
+                yPercent: 0,
+                opacity: 1,
+                stagger: 0.1,
+                ease: "power2.out",
+              },
+              "<"
+            );
 
             tl.to([".p-title-3", ".p-desc-3", ".p-title-4", ".p-desc-4"], {
               backgroundPosition: "0% 0",
@@ -142,15 +164,38 @@ const Projects = () => {
               ease: "none",
             });
 
-            tl.to(".screen-1", { yPercent: 0, ease: "power2.inOut" }, "+=1");
+            tl.to(".screen-1", { yPercent: 0, ease: "power2.inOut" });
             tl.to(".screen-2", { yPercent: 0, ease: "power2.inOut" }, "<");
 
-            tl.to([".project-3", ".project-4"], {
-              xPercent: 0,
+            tl.to([".project-1"], {
+              xPercent: 100,
               opacity: 1,
               stagger: 0.1,
               ease: "power2.out",
             });
+
+            tl.to(
+              [".project-2"],
+              {
+                xPercent: -100,
+                opacity: 1,
+                stagger: 0.1,
+                ease: "power2.out",
+              },
+              "<"
+            );
+
+            tl.to(
+              [".project-3", ".project-4"],
+              {
+                xPercent: 0,
+                opacity: 1,
+                stagger: 0.1,
+                ease: "power2.out",
+              },
+              "<"
+            );
+
             tl.to([".p-title-3", ".p-desc-3", ".p-title-4", ".p-desc-4"], {
               backgroundPosition: "0% 0",
               stagger: 0.1,
@@ -165,21 +210,21 @@ const Projects = () => {
 
   const renderProjectContent = (project) => (
     <>
-      <div className="h-2/5 md:h-1/2 w-full overflow-hidden rounded-lg">
+      <div className="h-2/5 md:h-1/2 w-full overflow-hidden">
         <img
           src={project.image}
           alt={project.title}
           className="size-full object-cover"
         />
       </div>
-      <div className="flex h-3/5 md:h-1/2 flex-col pt-6">
+      <div className="flex h-3/5 md:h-1/2 flex-col pt-4">
         <h2
           className={`p-title-${project.id} text-reveal special-font text-2xl md:text-3xl font-bold tracking-tight text-white`}
         >
           {project.title}
         </h2>
         <p
-          className={`p-desc-${project.id} text-reveal font-robert-regular mt-3 text-sm text-white/80`}
+          className={`p-desc-${project.id} text-reveal font-robert-regular mt-1 text-sm text-white/80`}
         >
           {project.description}
         </p>
@@ -193,7 +238,7 @@ const Projects = () => {
             </span>
           ))}
         </div>
-        <div className="mt-auto flex items-center gap-4 pt-4">
+        <div className="mt-auto flex items-center gap-2 pt-2">
           <a
             href={project.liveLink}
             target="_blank"
@@ -221,25 +266,25 @@ const Projects = () => {
       id="projects"
       className="relative min-h-screen w-screen overflow-hidden bg-white"
     >
-      <div className="projects-title pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
+      <div className="projects-title pointer-events-none absolute inset-0 z-30 flex items-center justify-center bg-white">
         <h1 className="special-font font-zentry text-center text-7xl font-black uppercase text-black sm:text-9xl md:text-[10rem]">
           Pro<b>je</b>cts
         </h1>
       </div>
 
       {/* This container will hold the sliding screens */}
-      <div className="projects-filmstrip relative h-screen w-full">
+      <div className="projects-filmstrip relative h-screen w-full bg-zinc-900">
         {/* Screen 1 */}
         <div className="screen-1 absolute inset-0 z-10 flex h-full w-full flex-col items-center md:flex-row">
           <ProjectCard
             project={projectsData[0]}
-            className="project-1 bg-sky-500"
+            className="project-1 bg-zinc-900"
           >
             {renderProjectContent(projectsData[0])}
           </ProjectCard>
           <ProjectCard
             project={projectsData[1]}
-            className="project-2 bg-rose-500"
+            className="project-2 bg-zinc-900"
           >
             {renderProjectContent(projectsData[1])}
           </ProjectCard>
@@ -249,13 +294,13 @@ const Projects = () => {
         <div className="screen-2 absolute inset-0 z-20 flex h-full w-full flex-col items-center md:flex-row">
           <ProjectCard
             project={projectsData[2]}
-            className="project-3 bg-teal-500"
+            className="project-3 bg-zinc-900"
           >
             {renderProjectContent(projectsData[2])}
           </ProjectCard>
           <ProjectCard
             project={projectsData[3]}
-            className="project-4 bg-indigo-500"
+            className="project-4 bg-zinc-900"
           >
             {renderProjectContent(projectsData[3])}
           </ProjectCard>
