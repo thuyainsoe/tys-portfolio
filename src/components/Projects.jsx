@@ -289,7 +289,6 @@ const Projects = () => {
             {renderProjectContent(projectsData[1])}
           </ProjectCard>
         </div>
-
         {/* Screen 2 */}
         <div className="screen-2 absolute inset-0 z-20 flex h-full w-full flex-col items-center md:flex-row">
           <ProjectCard
