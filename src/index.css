@@ -230,8 +230,8 @@ body {
 
 /* We need a separate class for brand colors */
 .text-reveal-bh {
-  background-image: linear-gradient(to right, #1ed292 50%, #52525b 50%);
+  background-image: linear-gradient(to right, #fff 50%, #52525b 50%);
 }
 .text-reveal-vo {
-  background-image: linear-gradient(to right, #ffae00 50%, #52525b 50%);
+  background-image: linear-gradient(to right, #fff 50%, #52525b 50%);
 }

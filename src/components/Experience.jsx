@@ -44,12 +44,9 @@ const visibleOneData = {
 const Experience = () => {
   useGSAP(() => {
     // --- INITIAL STATES ---
-    gsap.set(".experience-content", { xPercent: -50, opacity: 0 });
-    gsap.set(".work-hr", { opacity: 0 });
-    gsap.set(".work-visible", { opacity: 0 });
-    gsap.set(".work-hr .content-panel", { xPercent: -100 });
-    gsap.set(".work-visible .content-panel", { xPercent: -100 });
-    gsap.set([".bh-skill", ".vo-skill"], { opacity: 0 }); // Skill tags are faded in
+    // Removed: gsap.set(".experience-content", ...);
+    gsap.set(".work-visible", { xPercent: -100 });
+    gsap.set([".bh-skill", ".vo-skill"], { opacity: 0 });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -57,19 +54,14 @@ const Experience = () => {
         pin: true,
         start: "top top",
         end: "+=4000",
-        scrub: 1, // Set to 1 for a direct link between scroll and animation
+        scrub: 1,
       },
     });
 
     // --- ANIMATION SEQUENCE ---
-    // 1. Fade in the video background
-    tl.to(".experience-content", {
-      xPercent: 0,
-      opacity: 1,
-      ease: "power2.out",
-    });
+    // 1. Removed: tl.to(".experience-content", ...);
 
-    // 2. Split the triangles
+    // 2. Split the triangles (This is now the first animation)
     tl.to(
       ".clip-triangle-top",
       { xPercent: -100, ease: "power2.inOut" },
@@ -83,11 +75,6 @@ const Experience = () => {
 
     // 3. Reveal the "Better HR" section
     tl.to(".work-hr", { opacity: 1 }, "-=0.5");
-    tl.to(
-      ".work-hr .content-panel",
-      { xPercent: 0, ease: "power3.out" },
-      "-=0.5"
-    );
 
     // 3a. Karaoke text reveal animation for Better HR
     tl.to(
@@ -98,13 +85,8 @@ const Experience = () => {
     tl.to(".bh-skill", { opacity: 1, stagger: 0.05 }, "-=0.5");
 
     // 4. Transition to "Visible One"
-    tl.to(".work-hr", { opacity: 0, ease: "power3.in" });
+    tl.to(".work-visible", { xPercent: 0 });
     tl.to(".work-visible", { opacity: 1, ease: "power3.out" }, "<");
-    tl.to(
-      ".work-visible .content-panel",
-      { xPercent: 0, ease: "power3.out" },
-      "<"
-    );
 
     // 4a. Karaoke text reveal animation for Visible One
     tl.to(
@@ -120,30 +102,41 @@ const Experience = () => {
       id="experience"
       className="relative min-h-screen w-screen overflow-hidden"
     >
-      {/* Layer 0: Video background */}
-      <div className="experience-content absolute inset-0 text-center">
-        <div className="mask-clip-path about-image">
+      {/* Layer 0: Video background is now part of the title doors */}
+      {/* This div is now empty and can be removed if not needed for spacing */}
+      {/* <div className="experience-content absolute inset-0 text-center"></div> */}
+
+      {/* Layer 1: The Title "Doors" with video backgrounds */}
+      <div className="experience-title-container absolute inset-0 z-40">
+        <div className="clip-triangle-top absolute inset-0 flex-center bg-white">
+          {/* Video Background for Top Triangle */}
           <video
             src={"/videos/experience.mp4"}
             autoPlay
             loop
             muted
             playsInline
-            className="absolute left-0 top-0 z-0 size-full object-cover object-[70%] md:object-center"
+            className="absolute left-0 top-0 z-0 size-full object-cover"
           />
-          <div className="absolute inset-0 bg-black opacity-40"></div>
-        </div>
-      </div>
-
-      {/* Layer 1: The Title "Doors" */}
-      <div className="experience-title-container absolute inset-0 z-40">
-        <div className="clip-triangle-top absolute inset-0 flex-center bg-white">
-          <div className="special-font text-center font-zentry text-7xl font-black uppercase !text-[#1ed292] sm:text-9xl md:text-8xl lg:text-[10rem]">
+          <div className="absolute inset-0 z-0 bg-black opacity-40"></div>
+          {/* Title Text */}
+          <div className="relative z-10 special-font text-center font-zentry text-7xl font-black uppercase !text-[#1ed292] sm:text-9xl md:text-8xl lg:text-[10rem]">
             Exp<b>e</b>rie<b>nc</b>e
           </div>
         </div>
         <div className="clip-triangle-bottom absolute inset-0 flex-center bg-white">
-          <div className="special-font text-center font-zentry text-7xl font-black uppercase !text-[#ffae00] sm:text-9xl md:text-8xl lg:text-[10rem]">
+          {/* Video Background for Bottom Triangle */}
+          <video
+            src={"/videos/experience.mp4"}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute left-0 top-0 z-0 size-full object-cover"
+          />
+          <div className="absolute inset-0 z-0 bg-black opacity-40"></div>
+          {/* Title Text */}
+          <div className="relative z-10 special-font text-center font-zentry text-7xl font-black uppercase !text-[#ffae00] sm:text-9xl md:text-8xl lg:text-[10rem]">
             Exp<b>e</b>rie<b>nc</b>e
           </div>
         </div>
@@ -151,10 +144,10 @@ const Experience = () => {
 
       {/* Layer 2: Better HR Experience */}
       <div className="work-hr pointer-events-none absolute inset-0 z-20 w-full">
-        <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-zinc-900 md:w-3/5">
+        <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-[#1ed292]">
           <div
             aria-hidden="true"
-            className="special-font absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter text-white opacity-5"
+            className="special-font absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter text-white opacity-30"
           >
             01
           </div>
@@ -196,10 +189,10 @@ const Experience = () => {
 
       {/* Layer 3: Visible One Experience */}
       <div className="work-visible pointer-events-none absolute inset-0 z-30 w-full">
-        <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-zinc-900 md:w-3/5">
+        <div className="content-panel absolute left-0 top-0 z-10 h-full w-full bg-[#ffae00]">
           <div
             aria-hidden="true"
-            className="special-font absolute -bottom-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter text-white opacity-5"
+            className="special-font absolute -bottom-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter text-white opacity-30"
           >
             02
           </div>
@@ -238,8 +231,6 @@ const Experience = () => {
           </div>
         </div>
       </div>
-
-      {/* UX Layer: Scroll down indicator */}
     </div>
   );
 };
