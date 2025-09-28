@@ -61,11 +61,7 @@ const Experience = () => {
     // 1. Removed: tl.to(".experience-content", ...);
 
     // 2. Split the triangles (This is now the first animation)
-    tl.to(
-      ".clip-triangle-top",
-      { xPercent: -100, ease: "power2.inOut" },
-      "+=0.5"
-    );
+    tl.to(".clip-triangle-top", { xPercent: -100, ease: "power2.inOut" });
     tl.to(
       ".clip-triangle-bottom",
       { xPercent: 100, ease: "power2.inOut" },
@@ -73,7 +69,7 @@ const Experience = () => {
     );
 
     // 3. Reveal the "Better HR" section
-    tl.to(".work-hr", { opacity: 1 }, "-=0.5");
+    tl.to(".work-hr", { opacity: 1 });
 
     // 3a. Karaoke text reveal animation for Better HR
     tl.to(
@@ -88,11 +84,11 @@ const Experience = () => {
     tl.to(".work-visible", { opacity: 1, ease: "power3.out" }, "<");
 
     // 4a. Karaoke text reveal animation for Visible One
-    tl.to(
-      [".vo-company", ".vo-role", ".vo-duration", ".vo-desc"],
-      { backgroundPosition: "0% 0", stagger: 0.2, ease: "none" },
-      "-=0.2"
-    );
+    tl.to([".vo-company", ".vo-role", ".vo-duration", ".vo-desc"], {
+      backgroundPosition: "0% 0",
+      stagger: 0.2,
+      ease: "none",
+    });
     tl.to(".vo-skill", { opacity: 1, stagger: 0.05 }, "-=0.5");
   }, []);
 

@@ -213,11 +213,10 @@ const Projects = () => {
       });
 
       // Title Doors Animation
-      tl.to(
-        ".clip-triangle-top-project",
-        { xPercent: -100, ease: "power2.inOut" },
-        "+=0.5"
-      );
+      tl.to(".clip-triangle-top-project", {
+        xPercent: -100,
+        ease: "power2.inOut",
+      });
       tl.to(
         ".clip-triangle-bottom-project",
         { xPercent: 100, ease: "power2.inOut" },
