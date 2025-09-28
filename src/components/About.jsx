@@ -13,7 +13,7 @@ const sectionsData = [
     textColor: "text-white",
     title: "My Journey / Background",
     content:
-      "From designing my first static website in high school to leading frontend development in real-world projects, my journey has been driven by curiosity and persistence.",
+      "As a student at the University of Computer Studies, I discovered my passion for web development early on, in my first year. This strong interest drove me to thoroughly learn the fundamentals, starting with JavaScript, which ultimately launched my journey into the field of frontend development.",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const sectionsData = [
     textColor: "text-black",
     title: "Values & Mindset",
     content:
-      "I believe in clean code, collaborative teamwork, and building products that solve real problems while creating delightful user experiences.",
+      "My philosophy is simple: write clean code and build things that help people. I love working in a team where there's mutual respect, and I have a strong passion for designing neat, user-friendly UIs that people enjoy using.",
   },
   {
     id: 3,
@@ -29,23 +29,15 @@ const sectionsData = [
     textColor: "text-white",
     title: "What I’m Learning / Future Goals",
     content:
-      "I’m currently diving deeper into Three.js and AI-powered frontend experiences to push the boundaries of interactive design.",
-  },
-  {
-    id: 4,
-    bgColor: "bg-white",
-    textColor: "text-black",
-    title: "Testimonials / Collaborations",
-    content:
-      "I’ve collaborated with startups, SaaS platforms, and e-commerce companies to ship high-impact products.",
+      "I am continuously learning new technologies. My current focus is on backend development with NestJS and Express.js, alongside advancing my frontend skills in Three.js and GSAP. I am also very interested in exploring AI next.",
   },
   {
     id: 5,
-    bgColor: "bg-zinc-900",
-    textColor: "text-white",
+    bgColor: "bg-white",
+    textColor: "text-black",
     title: "Fun Facts",
     content:
-      "I drink too much coffee ☕, love football ⚽, and can spend hours tweaking UI details.",
+      "Outside of coding, my main passion is playing football ⚽. When I am coding, I love getting lost in the details of creating beautiful user interfaces and dynamic web animations.",
   },
 ];
 

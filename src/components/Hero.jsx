@@ -106,7 +106,7 @@ const Hero = () => {
               id="hero-heading-name"
               className="hero-heading text-white special-font mb-5 lg:mb-0"
             >
-              THUREIN <b>SOE</b>
+              <b>THU</b> <b>YAIN</b> <b>SOE</b>
             </h1>
             <p className="mb-5 max-w-64 md:max-w-80 lg:max-w-3xl font-robert-regular text-white">
               I craft responsive, SEO-friendly, and scalable web applications
@@ -115,12 +115,14 @@ const Hero = () => {
               platforms, and business websites that combine performance with
               great user experience.
             </p>
-            <Button
-              id="contact-me-button" // Added an ID for targeting
-              title="Contact Me"
-              leftIcon={<TiLocationArrow />}
-              containerClass={"!bg-accent-yellow flex-center gap-1"}
-            />
+            <a href="mailto:thuyainsoe163361@gmail.com">
+              <Button
+                id="contact-me-button"
+                title="Contact Me"
+                leftIcon={<TiLocationArrow />}
+                containerClass={"!bg-accent-yellow flex-center gap-1"}
+              />
+            </a>
           </div>
         </div>
 

@@ -9,17 +9,16 @@ const betterHRData = {
   id: 1,
   companyHighlight: "Better <b>H</b>R",
   role: "Front End Developer",
-  duration: "Oct 2023 - Nov 2022",
+  duration: "Oct 2022 - Nov 2023",
   description:
-    "As a key member of the front-end team, I spearheaded the development of responsive and interactive user interfaces using React and Next.js. I collaborated closely with UI/UX designers to translate complex requirements into pixel-perfect, high-performance web applications, improving user engagement by 25%.",
+    "Built responsive HR management features with Vue.js for employee data, attendance, leave, and payroll processing. Contributed to a SaaS platform managing $8M+ in monthly salaries across multiple countries, ensuring scalability and reliability. Optimized UI components and reduced bugs by 20%, improving user satisfaction and adoption.",
   skills: [
-    "React.js",
-    "Next.js",
-    "TypeScript",
+    "Vue.js",
+    "Nuxt.js",
+    "Javascript",
     "Tailwind CSS",
-    "GSAP",
     "Figma",
-    "REST APIs",
+    "Graphql",
   ],
 };
 
@@ -27,17 +26,17 @@ const visibleOneData = {
   id: 2,
   companyHighlight: "Vis<b>i</b>ble One",
   role: "Front End Developer",
-  duration: "May 2022 - Present",
+  duration: "Nov 2023 - Present",
   description:
-    "During my internship, I contributed to various client projects, focusing on building and maintaining WordPress websites. I gained hands-on experience with PHP, JavaScript, and CSS, and learned to work effectively in an agile development environment, assisting senior developers in delivering high-quality web solutions.",
+    "Developed responsive websites and e-commerce platforms using React, TypeScript, and Next.js, improving page load speed by up to 30%. Implemented SEO best practices and optimized front-end performance, increasing search rankings and conversion rates. Collaborated with designers and backend developers to deliver custom digital solutions for businesses in Hong Kong across multiple industries.",
   skills: [
-    "HTML5 & CSS3",
-    "JavaScript (ES6+)",
+    "React",
+    "Next.js",
+    "Typescript",
     "PHP",
     "WordPress",
-    "jQuery",
-    "Bootstrap",
-    "SEO Principles",
+    "GSAP",
+    "REST APIs",
   ],
 };
 
