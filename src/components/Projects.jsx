@@ -21,9 +21,10 @@ export const ProjectCard = ({
   return (
     <div className="relative size-full overflow-hidden">
       {/* ✨ Blank Space ဖြည့်ရန် Giant Numbering ထည့်သွင်းခြင်း */}
+
       <div
         aria-hidden="true"
-        className="special-font pointer-events-none absolute -bottom-10 right-0 select-none text-[16rem] font-black leading-none text-white/5 md:-bottom-16 md:right-5 md:text-[20rem]"
+        className="special-font absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter text-white opacity-20"
       >
         {projectNumber}
       </div>
@@ -125,9 +126,9 @@ const projectsData = [
 // ✨ 3. Color Theme အသစ် သတ်မှတ်ခြင်း
 const backgroundColors = [
   "bg-zinc-900", // Project 1
-  "bg-rose-950", // Project 2
+  "bg-zinc-950", // Project 2
   "bg-zinc-900", // Project 3 (Same as 1)
-  "bg-rose-950", // Project 4 (Same as 2)
+  "bg-zinc-950", // Project 4 (Same as 2)
 ];
 // Note: rose-950 မရှိပါက tailwind.config.js တွင် colors: { rose: { 950: '#4c0519' } } extend လုပ်ပါ။
 
