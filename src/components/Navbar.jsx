@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Github, Linkedin } from "lucide-react";
+import { useWindowScroll } from "react-use";
+import gsap from "gsap";
 
 // --- NavBar Component ---
 // ✨ FIX: NavBar component ကို ဤ file ထဲသို့ တိုက်ရိုက်ထည့်သွင်းထားပါသည်
@@ -14,6 +16,11 @@ const navItems = [
 
 const NavBar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const navContainerRef = useRef(null);
+
+  const { y: currentScrollY } = useWindowScroll();
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -30,12 +37,39 @@ const NavBar = () => {
     };
   }, [isDrawerOpen]);
 
+  useEffect(() => {
+    if (currentScrollY === 0) {
+      // Topmost position: show navbar without floating-nav
+      setIsNavVisible(true);
+      navContainerRef.current.classList.remove("floating-nav");
+    } else if (currentScrollY > lastScrollY) {
+      // Scrolling down: hide navbar and apply floating-nav
+      setIsNavVisible(false);
+      navContainerRef.current.classList.add("floating-nav");
+    } else if (currentScrollY < lastScrollY) {
+      // Scrolling up: show navbar with floating-nav
+      setIsNavVisible(true);
+      navContainerRef.current.classList.add("floating-nav");
+    }
+
+    setLastScrollY(currentScrollY);
+  }, [currentScrollY, lastScrollY]);
+
+  useEffect(() => {
+    gsap.to(navContainerRef.current, {
+      y: isNavVisible ? 0 : -100,
+      opacity: isNavVisible ? 1 : 0,
+      duration: 0.2,
+    });
+  }, [isNavVisible]);
+
   return (
     <>
       <button
+        ref={navContainerRef}
         onClick={toggleDrawer}
         className={clsx(
-          "fixed top-4 right-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-full border border-white/10 bg-zinc-900/80 backdrop-blur-md transition-all duration-300 ease-in-out hover:bg-zinc-800"
+          "fixed !rounded-full top-4 right-3 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1  border border-white/10 bg-zinc-900/80 backdrop-blur-md hover:bg-zinc-800"
         )}
         aria-label="Toggle menu"
       >
