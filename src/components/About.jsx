@@ -49,7 +49,7 @@ const About = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#clip",
-        start: "center center",
+        start: "top top",
         end: "+=3000",
         scrub: 1,
         pin: true,
