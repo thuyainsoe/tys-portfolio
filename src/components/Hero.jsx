@@ -120,7 +120,9 @@ const Hero = () => {
                 id="contact-me-button"
                 title="Contact Me"
                 leftIcon={<TiLocationArrow />}
-                containerClass={"!bg-accent-yellow flex-center gap-1"}
+                containerClass={
+                  "!bg-accent-yellow flex-center gap-1 text-white"
+                }
               />
             </a>
           </div>

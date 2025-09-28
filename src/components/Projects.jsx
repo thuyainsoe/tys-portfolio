@@ -135,8 +135,8 @@ const particleConfigs = [
   {
     particles: {
       number: { value: 60 },
-      color: { value: "#ffffff" },
-      opacity: { value: 0.3 },
+      color: { value: "#f5d63d" },
+      opacity: { value: 0.8 },
       size: { value: 2 },
       links: {
         enable: true,
@@ -152,9 +152,9 @@ const particleConfigs = [
   {
     particles: {
       number: { value: 40 },
-      color: { value: "#ff4747" },
+      color: { value: "#00d1db" },
       shape: { type: "circle" },
-      opacity: { value: 0.5, random: true },
+      opacity: { value: 0.8, random: true },
       size: { value: { min: 1, max: 4 }, random: true },
       move: {
         enable: true,
@@ -168,9 +168,9 @@ const particleConfigs = [
   {
     particles: {
       number: { value: 50 },
-      color: { value: "#ffffff" },
+      color: { value: "#f5d63d" },
       shape: { type: "edge" },
-      opacity: { value: 0.4 },
+      opacity: { value: 0.8 },
       size: { value: 1.5 },
       move: { enable: true, speed: 1, straight: true, out_mode: "bounce" },
     },
@@ -179,9 +179,9 @@ const particleConfigs = [
   {
     particles: {
       number: { value: 25 },
-      color: { value: "#ff4747" },
+      color: { value: "#00d1db" },
       shape: { type: "circle" },
-      opacity: { value: 0.6, random: true },
+      opacity: { value: 0.8, random: true },
       size: { value: { min: 2, max: 6 }, random: true },
       move: { enable: true, speed: 1.5, direction: "top", out_mode: "out" },
     },

@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import url("https://fonts.cdnfonts.com/css/general-sans");
 
+html {
+}
+
 body {
   width: 100dvw;
   overflow-x: hidden;
