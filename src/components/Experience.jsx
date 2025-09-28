@@ -102,10 +102,6 @@ const Experience = () => {
       id="experience"
       className="relative min-h-screen w-screen overflow-hidden"
     >
-      {/* Layer 0: Video background is now part of the title doors */}
-      {/* This div is now empty and can be removed if not needed for spacing */}
-      {/* <div className="experience-content absolute inset-0 text-center"></div> */}
-
       {/* Layer 1: The Title "Doors" with video backgrounds */}
       <div className="experience-title-container absolute inset-0 z-40">
         <div className="clip-triangle-top absolute inset-0 flex-center bg-white">

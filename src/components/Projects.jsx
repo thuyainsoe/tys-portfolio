@@ -24,7 +24,11 @@ export const ProjectCard = ({
 
       <div
         aria-hidden="true"
-        className="special-font absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter text-white opacity-20"
+        className={`special-font absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter opacity-30 ${
+          projectNumber === "01" || projectNumber === "03"
+            ? "text-[#e0b800]"
+            : "text-[#ff4747]"
+        }`}
       >
         {projectNumber}
       </div>
@@ -199,6 +203,7 @@ const Projects = () => {
   useGSAP(
     () => {
       gsap.set(".project-panel:not(:first-child)", { yPercent: 100 });
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: mainRef.current,
@@ -208,11 +213,18 @@ const Projects = () => {
           scrub: 1,
         },
       });
-      tl.to(".projects-title-container", {
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
+
+      tl.to(
+        ".clip-triangle-top-project",
+        { xPercent: -100, ease: "power2.inOut" },
+        "+=0.5"
+      );
+      tl.to(
+        ".clip-triangle-bottom-project",
+        { xPercent: 100, ease: "power2.inOut" },
+        "<"
+      );
+
       projectsData.forEach((_, index) => {
         if (index > 0) {
           tl.to(
@@ -232,14 +244,39 @@ const Projects = () => {
       id="projects"
       className="relative min-h-screen w-screen overflow-hidden bg-black"
     >
-      <div className="projects-title-container pointer-events-none absolute inset-0 z-50 flex flex-col items-center justify-center bg-black">
-        <AnimatedTitle
-          title="My <b>Pro</b>jects"
-          containerClass="!text-white text-center hero-heading special-font"
-        />
-        <p className="mt-4 max-w-2xl text-center text-base text-white/60 md:text-lg">
-          Scroll down to explore my work.
-        </p>
+      <div className="experience-title-container absolute inset-0 z-40">
+        <div className="clip-triangle-top-project absolute inset-0 flex-center bg-white">
+          {/* Video Background for Top Triangle */}
+          <video
+            src={"/videos/hero-2.mp4"}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute left-0 top-0 z-0 size-full object-cover"
+          />
+          <div className="absolute inset-0 z-0 bg-black opacity-40"></div>
+          {/* Title Text */}
+          <div className="relative z-10 special-font text-center font-zentry text-7xl font-black uppercase !text-[#e0b800] sm:text-9xl md:text-8xl lg:text-[10rem]">
+            Pro<b>je</b>ct<b>s</b>
+          </div>
+        </div>
+        <div className="clip-triangle-bottom-project absolute inset-0 flex-center bg-white">
+          {/* Video Background for Bottom Triangle */}
+          <video
+            src={"/videos/hero-2.mp4"}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute left-0 top-0 z-0 size-full object-cover"
+          />
+          <div className="absolute inset-0 z-0 bg-black opacity-40"></div>
+          {/* Title Text */}
+          <div className="relative z-10 special-font text-center font-zentry text-7xl font-black uppercase !text-[#ff4747] sm:text-9xl md:text-8xl lg:text-[10rem]">
+            Pro<b>je</b>ct<b>s</b>
+          </div>
+        </div>
       </div>
 
       <div className="projects-wrapper absolute inset-0">

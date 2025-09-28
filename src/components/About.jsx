@@ -58,7 +58,7 @@ const About = () => {
       scrollTrigger: {
         trigger: "#clip",
         start: "center center",
-        end: "+=5000",
+        end: "+=3000",
         scrub: 1,
         pin: true,
         pinSpacing: true,
