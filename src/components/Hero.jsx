@@ -127,7 +127,7 @@ const Hero = () => {
         </div>
 
         <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-white">
-          <b>WEB</b> DEVELOPER
+          <b>WEB</b> <b>DEVELOPER</b>
         </h1>
       </div>
 
