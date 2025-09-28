@@ -1,6 +1,5 @@
 import { useRef, useCallback } from "react";
 import { Github, Link as LinkIcon } from "lucide-react";
-import AnimatedTitle from "./AnimatedTitle";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
@@ -9,7 +8,9 @@ import { loadSlim } from "tsparticles-slim";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ✨ 1. ProjectCard Component ထဲသို့ projectNumber prop ထည့်သွင်းခြင်း
+// ProjectCard, BentoTilt, projectsData, etc. remain the same.
+// ... (သင့်ရဲ့ ProjectCard component နဲ့ တခြား data တွေက ဒီနေရာမှာ ရှိနေမှာပါ)
+
 export const ProjectCard = ({
   projectNumber,
   title,
@@ -20,11 +21,9 @@ export const ProjectCard = ({
 }) => {
   return (
     <div className="relative size-full overflow-hidden">
-      {/* ✨ Blank Space ဖြည့်ရန် Giant Numbering ထည့်သွင်းခြင်း */}
-
       <div
         aria-hidden="true"
-        className={`special-font absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter opacity-30 ${
+        className={`special-font pointer-events-none absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter opacity-30 ${
           projectNumber === "01" || projectNumber === "03"
             ? "text-[#e0b800]"
             : "text-[#ff4747]"
@@ -36,11 +35,11 @@ export const ProjectCard = ({
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
       <div className="relative z-10 flex size-full flex-col justify-end p-4 text-white md:p-6 lg:p-8">
         <div>
+          {/* ✨ Animation အတွက် Class များ ထည့်သွင်းထားပြီး */}
           <h1 className="bento-title special-font text-2xl font-bold md:text-3xl lg:text-4xl">
             {title}
           </h1>
-          {/* Description အတွက် max-width ကို ချိန်ညှိပေးထားပါသည် */}
-          <p className="font-robert-regular mt-2 max-w-2xl text-sm text-white/80 md:text-base">
+          <p className="project-description font-robert-regular mt-2 max-w-2xl text-sm text-white/80 md:text-base">
             {description}
           </p>
         </div>
@@ -48,7 +47,7 @@ export const ProjectCard = ({
           {techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm"
+              className="tech-tag rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm"
             >
               {tech}
             </span>
@@ -60,7 +59,7 @@ export const ProjectCard = ({
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm transition-colors hover:text-yellow-300"
+              className="project-link flex items-center gap-2 text-sm transition-colors hover:text-yellow-300"
             >
               <LinkIcon size={16} />
               Live Site
@@ -71,7 +70,7 @@ export const ProjectCard = ({
               href={repoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm transition-colors hover:text-gray-400"
+              className="project-link flex items-center gap-2 text-sm transition-colors hover:text-gray-400"
             >
               <Github size={16} />
               Source Code
@@ -87,7 +86,6 @@ export const BentoTilt = ({ children, className = "" }) => (
   <div className={className}>{children}</div>
 );
 
-// ✨ 2. Description များကို ၃ ဆခန့် ပိုရှည်အောင် ရေးသားခြင်း
 const projectsData = [
   {
     id: 1,
@@ -127,17 +125,15 @@ const projectsData = [
   },
 ];
 
-// ✨ 3. Color Theme အသစ် သတ်မှတ်ခြင်း
 const backgroundColors = [
   "bg-zinc-900", // Project 1
   "bg-zinc-950", // Project 2
-  "bg-zinc-900", // Project 3 (Same as 1)
-  "bg-zinc-950", // Project 4 (Same as 2)
+  "bg-zinc-900", // Project 3
+  "bg-zinc-950", // Project 4
 ];
-// Note: rose-950 မရှိပါက tailwind.config.js တွင် colors: { rose: { 950: '#4c0519' } } extend လုပ်ပါ။
 
 const particleConfigs = [
-  // Config 1 (Yellow Accent): E-commerce
+  // Config 1 (Yellow Accent)
   {
     particles: {
       number: { value: 60 },
@@ -154,7 +150,7 @@ const particleConfigs = [
       move: { enable: true, speed: 1.5 },
     },
   },
-  // Config 2 (Red Accent): Portfolio
+  // Config 2 (Red Accent)
   {
     particles: {
       number: { value: 40 },
@@ -170,7 +166,7 @@ const particleConfigs = [
       },
     },
   },
-  // Config 3 (Yellow Accent): Task App
+  // Config 3 (Yellow Accent)
   {
     particles: {
       number: { value: 50 },
@@ -181,7 +177,7 @@ const particleConfigs = [
       move: { enable: true, speed: 1, straight: true, out_mode: "bounce" },
     },
   },
-  // Config 4 (Red Accent): Weather App
+  // Config 4 (Red Accent)
   {
     particles: {
       number: { value: 25 },
@@ -200,10 +196,16 @@ const Projects = () => {
     async (engine) => await loadSlim(engine),
     []
   );
+
   useGSAP(
     () => {
+      // ✨ အဆင့် ၁: Animation မစခင် Element တွေရဲ့ မူလအနေအထားကို သတ်မှတ်ခြင်း
       gsap.set(".project-panel:not(:first-child)", { yPercent: 100 });
+      gsap.set(".bento-title", { xPercent: 100, opacity: 0 });
+      gsap.set(".project-description", { yPercent: 50, opacity: 0 });
+      gsap.set([".tech-tag", ".project-link"], { yPercent: 100, opacity: 0 });
 
+      // ✨ အဆင့် ၂: Main Timeline တစ်ခုတည်းကိုသာ အသုံးပြုခြင်း
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: mainRef.current,
@@ -214,24 +216,84 @@ const Projects = () => {
         },
       });
 
+      // Title Doors Animation
       tl.to(
         ".clip-triangle-top-project",
         { xPercent: -100, ease: "power2.inOut" },
-        "+=0.5"
+        "+=0.5" // Timeline စပြီး 0.5s အကြာမှာ run မယ်
       );
       tl.to(
         ".clip-triangle-bottom-project",
         { xPercent: 100, ease: "power2.inOut" },
-        "<"
+        "<" // အပေါ် animation နဲ့ တစ်ပြိုင်တည်း run မယ်
       );
 
+      // ✨ အဆင့် ၃: ပထမ Project Card (index 0) ရဲ့ Content Animation
+      tl.to(
+        ".project-panel-0 .bento-title",
+        { xPercent: 0, opacity: 1, ease: "power3.out", duration: 1 },
+        ">-0.5" // အပေါ် animation မပြီးခင် 0.5s အလိုမှာ စ run မယ်
+      )
+        .to(
+          ".project-panel-0 .project-description",
+          { yPercent: 0, opacity: 1, ease: "power3.out", duration: 0.8 },
+          "<0.2" // အရှေ့ animation စပြီး 0.2s အကြာမှာ run မယ်
+        )
+        .to(
+          ".project-panel-0 .tech-tag",
+          {
+            yPercent: 0,
+            opacity: 1,
+            stagger: 0.05,
+            ease: "power2.out",
+            duration: 0.5,
+          },
+          "<0.3"
+        )
+        .to(
+          ".project-panel-0 .project-link",
+          { yPercent: 0, opacity: 1, stagger: 0.1, ease: "power2.out" },
+          "<"
+        );
+
+      // ✨ အဆင့် ၄: ကျန်ရှိတဲ့ Project Card များအတွက် Panel နဲ့ Content Animation ကို တစ်ပေါင်းတည်း ထည့်သွင်းခြင်း
       projectsData.forEach((_, index) => {
         if (index > 0) {
+          const panelSelector = `.project-panel-${index}`;
+          // Panel ကို အပေါ်ကို slide တက်လာစေတဲ့ animation
           tl.to(
-            `.project-panel-${index}`,
+            panelSelector,
             { yPercent: 0, ease: "power2.inOut" },
-            `project${index}`
+            `project${index}` // label
           );
+
+          // Panel တက်လာတာနဲ့ တစ်ပြိုင်နက် Content Animation တွေကိုပါ ဆက်တိုက် run စေမယ်
+          tl.to(
+            `${panelSelector} .bento-title`,
+            { xPercent: 0, opacity: 1, ease: "power3.out", duration: 1 },
+            "<0.5" // panel စတက်ပြီး 0.5s အကြာမှာ content animation စမယ်
+          )
+            .to(
+              `${panelSelector} .project-description`,
+              { yPercent: 0, opacity: 1, ease: "power3.out", duration: 0.8 },
+              "<0.2"
+            )
+            .to(
+              `${panelSelector} .tech-tag`,
+              {
+                yPercent: 0,
+                opacity: 1,
+                stagger: 0.05,
+                ease: "power2.out",
+                duration: 0.5,
+              },
+              "<0.3"
+            )
+            .to(
+              `${panelSelector} .project-link`,
+              { yPercent: 0, opacity: 1, stagger: 0.1, ease: "power2.out" },
+              "<"
+            );
         }
       });
     },
@@ -244,9 +306,9 @@ const Projects = () => {
       id="projects"
       className="relative min-h-screen w-screen overflow-hidden bg-black"
     >
+      {/* ... (The rest of your JSX remains the same) ... */}
       <div className="experience-title-container absolute inset-0 z-40">
         <div className="clip-triangle-top-project absolute inset-0 flex-center bg-white">
-          {/* Video Background for Top Triangle */}
           <video
             src={"/videos/hero-2.mp4"}
             autoPlay
@@ -256,13 +318,11 @@ const Projects = () => {
             className="absolute left-0 top-0 z-0 size-full object-cover"
           />
           <div className="absolute inset-0 z-0 bg-black opacity-40"></div>
-          {/* Title Text */}
           <div className="relative z-10 special-font text-center font-zentry text-7xl font-black uppercase !text-[#e0b800] sm:text-9xl md:text-8xl lg:text-[10rem]">
             Pro<b>je</b>ct<b>s</b>
           </div>
         </div>
         <div className="clip-triangle-bottom-project absolute inset-0 flex-center bg-white">
-          {/* Video Background for Bottom Triangle */}
           <video
             src={"/videos/hero-2.mp4"}
             autoPlay
@@ -272,7 +332,6 @@ const Projects = () => {
             className="absolute left-0 top-0 z-0 size-full object-cover"
           />
           <div className="absolute inset-0 z-0 bg-black opacity-40"></div>
-          {/* Title Text */}
           <div className="relative z-10 special-font text-center font-zentry text-7xl font-black uppercase !text-[#ff4747] sm:text-9xl md:text-8xl lg:text-[10rem]">
             Pro<b>je</b>ct<b>s</b>
           </div>
@@ -292,10 +351,8 @@ const Projects = () => {
               options={particleConfigs[index]}
               className="absolute inset-0 z-0"
             />
-
             <div className="relative z-10 h-full w-full">
               <BentoTilt className="h-full w-full p-4 md:p-8">
-                {/* ✨ projectNumber prop ကို ဒီမှာ pass လုပ်ပေးပါ */}
                 <ProjectCard
                   {...project}
                   projectNumber={String(index + 1).padStart(2, "0")}
