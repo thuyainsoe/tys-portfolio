@@ -119,7 +119,7 @@ const NavBar = () => {
                   <span className="text-xs font-mono text-zinc-400">
                     0{index + 1}
                   </span>
-                  <span className="special-font text-xl font-zentry tracking-wider text-zinc-600 transition-all duration-300 group-hover:translate-x-2 group-hover:text-black">
+                  <span className="text-base uppercase text-zinc-600 transition-all duration-300 group-hover:translate-x-2 group-hover:text-black">
                     {item.name}
                   </span>
                 </a>
