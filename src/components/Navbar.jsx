@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, X } from "lucide-react";
 import { useWindowScroll } from "react-use";
 import gsap from "gsap";
 
@@ -38,24 +38,26 @@ const NavBar = () => {
   useEffect(() => {
     if (currentScrollY === 0) {
       setIsNavVisible(true);
-      navContainerRef.current.classList.remove("floating-nav");
+      navContainerRef.current?.classList.remove("floating-nav");
     } else if (currentScrollY > lastScrollY) {
       setIsNavVisible(false);
-      navContainerRef.current.classList.add("floating-nav");
+      navContainerRef.current?.classList.add("floating-nav");
     } else if (currentScrollY < lastScrollY) {
       setIsNavVisible(true);
-      navContainerRef.current.classList.add("floating-nav");
+      navContainerRef.current?.classList.add("floating-nav");
     }
 
     setLastScrollY(currentScrollY);
   }, [currentScrollY, lastScrollY]);
 
   useEffect(() => {
-    gsap.to(navContainerRef.current, {
-      y: isNavVisible ? 0 : -100,
-      opacity: isNavVisible ? 1 : 0,
-      duration: 0.2,
-    });
+    if (navContainerRef.current) {
+      gsap.to(navContainerRef.current, {
+        y: isNavVisible ? 0 : -100,
+        opacity: isNavVisible ? 1 : 0,
+        duration: 0.2,
+      });
+    }
   }, [isNavVisible]);
 
   return (
@@ -64,70 +66,64 @@ const NavBar = () => {
         ref={navContainerRef}
         onClick={toggleDrawer}
         className={clsx(
-          "group fixed right-3 top-4 z-50 flex h-12 w-12 flex-col items-center justify-center gap-1 !rounded-full border border-white/20 bg-black/30 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/40 hover:bg-black/50"
+          "group fixed right-4 top-4 z-50 flex size-12 flex-col items-center justify-center gap-1.5 border border-black/10 bg-white transition-all duration-300 hover:bg-black hover:border-black md:right-8 md:top-8"
         )}
         aria-label="Toggle menu"
       >
         <div
           className={clsx(
-            "h-0.5 w-6 rounded-full bg-white transition-all duration-300 ease-in-out group-hover:bg-cyan-400",
-            { "translate-y-[6px] rotate-45": isDrawerOpen }
+            "h-px w-6 bg-black transition-all duration-300 ease-in-out group-hover:bg-white",
+            { "translate-y-[7px] rotate-45": isDrawerOpen }
           )}
         />
         <div
           className={clsx(
-            "h-0.5 w-6 rounded-full bg-white transition-all duration-300 ease-in-out group-hover:bg-cyan-400",
-            {
-              "opacity-0": isDrawerOpen,
-            }
+            "h-px w-6 bg-black transition-all duration-300 ease-in-out group-hover:bg-white",
+            { "opacity-0": isDrawerOpen }
           )}
         />
         <div
           className={clsx(
-            "h-0.5 w-6 rounded-full bg-white transition-all duration-300 ease-in-out group-hover:bg-cyan-400",
-            { "-translate-y-[6px] -rotate-45": isDrawerOpen }
+            "h-px w-6 bg-black transition-all duration-300 ease-in-out group-hover:bg-white",
+            { "-translate-y-[7px] -rotate-45": isDrawerOpen }
           )}
         />
       </button>
 
       <div
         className={clsx(
-          "fixed inset-y-0 left-0 z-40 h-full w-full max-w-sm transform border-r border-white/10 bg-gradient-to-br from-slate-950 via-black to-slate-900 p-8 shadow-2xl backdrop-blur-2xl transition-transform duration-500 ease-in-out sm:w-80",
-          { "translate-x-0": isDrawerOpen, "-translate-x-full": !isDrawerOpen }
+          "fixed inset-y-0 right-0 z-40 h-full w-full max-w-md transform border-l border-black/10 bg-white transition-transform duration-500 ease-in-out sm:w-96",
+          { "translate-x-0": isDrawerOpen, "translate-x-full": !isDrawerOpen }
         )}
       >
-        {/* Ambient gradients */}
-        <div className="absolute left-0 top-1/4 h-64 w-64 rounded-full bg-cyan-500/10 blur-[100px]" />
-        <div className="absolute bottom-1/4 right-0 h-64 w-64 rounded-full bg-yellow-500/10 blur-[100px]" />
-
-        <div className="relative z-10 flex h-full flex-col justify-between">
+        <div className="flex h-full flex-col justify-between p-8 md:p-12">
           <div>
-            <div className="mb-12">
-              <h2 className="special-font text-2xl font-bold text-white">
+            <div className="mb-16">
+              <div className="mb-4 h-px w-16 bg-black" />
+              <h2 className="special-font mb-2 text-3xl font-bold">
                 Thu Yain Soe
               </h2>
-              <p className="font-robert-regular mt-1 text-sm text-gray-400">
+              <p className="font-robert-regular text-sm uppercase tracking-widest text-black/40">
                 Web Developer
               </p>
-              <div className="mt-3 h-1 w-16 rounded-full bg-gradient-to-r from-cyan-400 to-yellow-400" />
             </div>
 
-            <nav className="flex flex-col gap-6">
+            <nav className="flex flex-col gap-8">
               {navItems.map((item, index) => (
                 <a
                   key={item.name}
                   href={item.href}
                   onClick={toggleDrawer}
-                  className="group flex items-center gap-4 transition-all duration-300"
+                  className="group flex items-center gap-6 transition-all duration-300"
                 >
-                  <span className="font-mono text-xs text-cyan-400/60">
+                  <span className="font-mono text-xs text-black/20">
                     0{index + 1}
                   </span>
-                  <div className="flex items-center gap-3">
-                    <div className="h-px w-8 bg-gradient-to-r from-cyan-400/0 to-cyan-400/60 transition-all duration-300 group-hover:w-12 group-hover:to-cyan-400" />
-                    <span className="special-font text-lg uppercase tracking-wide text-gray-400 transition-all duration-300 group-hover:text-white">
+                  <div className="flex flex-col gap-1">
+                    <span className="special-font text-2xl uppercase tracking-tight transition-all duration-300 group-hover:translate-x-2">
                       {item.name}
                     </span>
+                    <div className="h-px w-0 bg-black transition-all duration-300 group-hover:w-full" />
                   </div>
                 </a>
               ))}
@@ -135,15 +131,15 @@ const NavBar = () => {
           </div>
 
           <div>
-            <div className="mb-6 h-px w-full bg-gradient-to-r from-white/0 via-white/10 to-white/0" />
+            <div className="mb-8 h-px w-full bg-black/10" />
 
-            <div className="flex items-center gap-4">
+            <div className="mb-8 flex items-center gap-4">
               <a
                 href="https://github.com/thuyainsoe"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-400 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/40 hover:bg-white/10 hover:text-cyan-400"
+                className="flex size-12 items-center justify-center border border-black/10 text-black transition-all duration-300 hover:bg-black hover:text-white"
               >
                 <Github size={18} strokeWidth={1.5} />
               </a>
@@ -152,20 +148,20 @@ const NavBar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-400 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/40 hover:bg-white/10 hover:text-cyan-400"
+                className="flex size-12 items-center justify-center border border-black/10 text-black transition-all duration-300 hover:bg-black hover:text-white"
               >
                 <Linkedin size={18} strokeWidth={1.5} />
               </a>
               <a
                 href="mailto:thuyainsoe163361@gmail.com"
                 aria-label="Email"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-400 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/40 hover:bg-white/10 hover:text-cyan-400"
+                className="flex size-12 items-center justify-center border border-black/10 text-black transition-all duration-300 hover:bg-black hover:text-white"
               >
                 <Mail size={18} strokeWidth={1.5} />
               </a>
             </div>
 
-            <p className="font-robert-regular mt-6 text-xs text-gray-600">
+            <p className="font-robert-regular text-xs uppercase tracking-widest text-black/20">
               © 2025 Thu Yain Soe
             </p>
           </div>
@@ -175,7 +171,7 @@ const NavBar = () => {
       {isDrawerOpen && (
         <div
           onClick={toggleDrawer}
-          className="fixed inset-0 z-30 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm"
           aria-hidden="true"
         />
       )}

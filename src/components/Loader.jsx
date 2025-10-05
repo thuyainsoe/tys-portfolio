@@ -5,16 +5,16 @@ const Loader = ({ onLoadComplete }) => {
   const loaderRef = useRef(null);
   const progressBarRef = useRef(null);
   const percentTextRef = useRef(null);
-  const circleRef = useRef(null);
+  const linesRef = useRef([]);
 
   useEffect(() => {
     const tl = gsap.timeline({
       onComplete: () => {
-        // Animate loader out
+        // Animate loader out with reveal effect
         gsap.to(loaderRef.current, {
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.inOut",
+          yPercent: -100,
+          duration: 1,
+          ease: "power3.inOut",
           onComplete: () => {
             if (onLoadComplete) onLoadComplete();
           },
@@ -22,97 +22,89 @@ const Loader = ({ onLoadComplete }) => {
       },
     });
 
+    // Animate decorative lines
+    tl.from(linesRef.current, {
+      scaleX: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power2.out",
+    });
+
     // Animate percentage counter and progress bar together
     const counter = { value: 0 };
 
-    // Progress bar animation using GSAP (more reliable)
+    // Progress bar animation
     tl.to(progressBarRef.current, {
       scaleX: 1,
-      duration: 2.5,
+      duration: 2,
       ease: "power2.inOut",
-    }, 0);
+    }, "-=0.3");
 
     // Percentage counter animation
     tl.to(counter, {
       value: 100,
-      duration: 2.5,
+      duration: 2,
       ease: "power2.inOut",
       onUpdate: () => {
         const percent = Math.floor(counter.value);
         if (percentTextRef.current) {
-          percentTextRef.current.textContent = `${percent}%`;
+          percentTextRef.current.textContent = `${percent}`;
         }
       },
-    }, 0);
-
-    // Pulse effect on circle
-    tl.to(
-      circleRef.current,
-      {
-        scale: 1.2,
-        opacity: 0.6,
-        duration: 0.8,
-        repeat: 2,
-        yoyo: true,
-        ease: "sine.inOut",
-      },
-      0
-    );
-
-    // Rotate animation (infinite)
-    gsap.to(circleRef.current, {
-      rotation: 360,
-      duration: 2.5,
-      ease: "linear",
-      repeat: -1,
-    });
+    }, "<");
   }, [onLoadComplete]);
 
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white"
     >
-      {/* Animated Background Gradients */}
-      <div className="absolute left-1/4 top-1/3 h-96 w-96 animate-pulse rounded-full bg-cyan-500/20 blur-[120px]" />
-      <div className="absolute bottom-1/3 right-1/4 h-96 w-96 animate-pulse rounded-full bg-yellow-500/20 blur-[120px] animation-delay-1000" />
-
-      {/* Loading Circle */}
-      <div className="relative mb-12">
-        <div
-          ref={circleRef}
-          className="h-32 w-32 rounded-full border-4 border-cyan-500/30 border-t-cyan-400"
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-24 w-24 rounded-full border-4 border-yellow-500/30 border-t-yellow-400" />
-        </div>
+      {/* Decorative corner lines */}
+      <div className="absolute left-0 top-0 p-8">
+        <div ref={el => linesRef.current[0] = el} className="mb-2 h-px w-16 origin-left bg-black" />
+        <div ref={el => linesRef.current[1] = el} className="h-px w-12 origin-left bg-black/60" />
+      </div>
+      <div className="absolute right-0 top-0 p-8">
+        <div ref={el => linesRef.current[2] = el} className="mb-2 h-px w-16 origin-right bg-black" />
+        <div ref={el => linesRef.current[3] = el} className="h-px w-12 origin-right bg-black/60" />
+      </div>
+      <div className="absolute bottom-0 left-0 p-8">
+        <div ref={el => linesRef.current[4] = el} className="mb-2 h-px w-12 origin-left bg-black/60" />
+        <div ref={el => linesRef.current[5] = el} className="h-px w-16 origin-left bg-black" />
+      </div>
+      <div className="absolute bottom-0 right-0 p-8">
+        <div ref={el => linesRef.current[6] = el} className="mb-2 h-px w-12 origin-right bg-black/60" />
+        <div ref={el => linesRef.current[7] = el} className="h-px w-16 origin-right bg-black" />
       </div>
 
-      {/* Percentage Text */}
-      <div className="mb-8 text-center">
-        <div
-          ref={percentTextRef}
-          className="special-font text-6xl font-black text-white md:text-8xl"
-        >
-          0%
+      {/* Main content */}
+      <div className="text-center">
+        <div className="mb-8 flex items-baseline justify-center gap-2">
+          <div
+            ref={percentTextRef}
+            className="special-font text-[10rem] font-black leading-none text-black md:text-[12rem]"
+          >
+            0
+          </div>
+          <div className="special-font text-4xl font-black text-black md:text-5xl">%</div>
         </div>
-        <p className="font-robert-regular mt-2 text-sm uppercase tracking-widest text-gray-400">
-          Loading Experience
+        <p className="font-robert-regular mb-12 text-xs uppercase tracking-[0.3em] text-black/60">
+          Loading
         </p>
       </div>
 
       {/* Progress Bar */}
-      <div className="relative h-1 w-64 overflow-hidden rounded-full bg-white/10 md:w-96">
+      <div className="relative h-px w-64 overflow-hidden bg-black/10 md:w-96">
         <div
           ref={progressBarRef}
-          className="h-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-cyan-400 to-yellow-400"
+          className="h-full origin-left scale-x-0 bg-black"
         />
       </div>
 
-      {/* Decorative Text */}
+      {/* Footer text */}
       <div className="absolute bottom-8 text-center">
-        <p className="font-robert-regular text-xs text-gray-600">
-          THU YAIN SOE - WEB DEVELOPER
+        <p className="font-robert-regular text-xs tracking-widest text-black/40">
+          THU YAIN SOE
         </p>
       </div>
     </div>

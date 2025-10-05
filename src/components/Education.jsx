@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-import { GraduationCap, BookOpen, Award } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,7 +47,7 @@ const Education = () => {
       { y: 50, opacity: 0 }
     );
 
-    // Fade in content container
+    // Fade in content
     mainTl.to(".education-content-container", {
       opacity: 1,
       y: 0,
@@ -90,53 +90,42 @@ const Education = () => {
   return (
     <div
       id="education"
-      className="relative min-h-screen w-screen overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900"
+      className="relative min-h-screen w-screen overflow-hidden bg-white"
     >
-      {/* Ambient background elements */}
-      <div className="absolute left-1/4 top-1/3 h-96 w-96 rounded-full bg-blue-500/20 blur-[120px]" />
-      <div className="absolute bottom-1/3 right-1/4 h-96 w-96 rounded-full bg-cyan-500/20 blur-[120px]" />
-
       {/* Education Content */}
       <div className="education-content-container pointer-events-none absolute inset-0 z-20 flex w-full items-center justify-center">
         <div className="relative h-full w-full">
-          {/* Background Icon */}
           <div
             aria-hidden="true"
-            className="absolute -bottom-1/4 left-0 select-none text-white opacity-5"
+            className="absolute -bottom-1/4 left-0 select-none text-black opacity-[0.02]"
           >
             <GraduationCap className="h-[40rem] w-[40rem]" strokeWidth={0.5} />
           </div>
 
           <div className="flex h-full w-full items-center justify-center p-4 md:p-16 lg:p-24">
-            <div className="relative max-w-4xl rounded-3xl border border-blue-400/30 bg-blue-500/10 p-6 backdrop-blur-xl md:p-12">
-              {/* Decorative floating icons */}
-              <div className="absolute -left-4 -top-4 rounded-full border border-blue-400/30 bg-blue-500/20 p-3 backdrop-blur-sm">
-                <BookOpen className="h-6 w-6 text-blue-400" />
-              </div>
-              <div className="absolute -right-4 -bottom-4 rounded-full border border-cyan-400/30 bg-cyan-500/20 p-3 backdrop-blur-sm">
-                <Award className="h-6 w-6 text-cyan-400" />
-              </div>
+            <div className="relative max-w-4xl border border-black/10 p-8 md:p-12">
+              <div className="mb-2 h-px w-16 bg-black" />
 
-              <div className="mb-6">
-                <h2 className="special-font edu-school font-general text-2xl font-black tracking-tight text-white md:text-4xl lg:text-5xl">
+              <div className="mb-8">
+                <h2 className="special-font edu-school font-general text-2xl font-black tracking-tight md:text-4xl lg:text-5xl">
                   {educationData.school}
                 </h2>
-                <div className="special-font edu-degree mt-3 text-sm uppercase text-blue-300 md:text-xl lg:text-2xl">
+                <div className="special-font edu-degree mt-4 text-sm uppercase text-black/60 md:text-xl lg:text-2xl">
                   {educationData.degree}
                 </div>
-                <p className="font-robert-regular edu-duration mt-1 text-base text-gray-400 md:text-lg">
+                <p className="font-robert-regular edu-duration mt-1 text-base text-black/40 md:text-lg">
                   {educationData.duration}
                 </p>
               </div>
               <div>
-                <p className="font-robert-regular edu-description text-sm leading-relaxed text-gray-300 md:text-base">
+                <p className="font-robert-regular edu-description text-sm leading-relaxed text-black/70 md:text-base">
                   {educationData.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {educationData.subjects.map((subject, index) => (
                     <span
                       key={index}
-                      className="edu-subject rounded-lg border border-blue-400/20 bg-blue-900/30 px-3 py-1.5 text-xs font-medium text-blue-300 backdrop-blur-sm transition-all duration-300 hover:border-blue-400/40 hover:bg-blue-900/50 md:text-sm"
+                      className="edu-subject font-robert-regular rounded-full border border-black/10 px-4 py-1.5 text-xs uppercase tracking-wide md:text-sm"
                     >
                       {subject}
                     </span>
@@ -144,9 +133,7 @@ const Education = () => {
                 </div>
               </div>
 
-              {/* Decorative corner elements */}
-              <div className="absolute left-4 top-4 h-12 w-12 rounded-tl-2xl border-l-2 border-t-2 border-blue-400/30" />
-              <div className="absolute bottom-4 right-4 h-12 w-12 rounded-br-2xl border-b-2 border-r-2 border-cyan-400/30" />
+              <div className="mt-8 h-px w-full bg-black/10" />
             </div>
           </div>
         </div>
@@ -154,8 +141,8 @@ const Education = () => {
 
       {/* Main Title */}
       <div className="education-main-title pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
-        <h1 className="special-font font-zentry text-center text-7xl font-black uppercase text-white sm:text-9xl md:text-[10rem]">
-          Edu<b className="text-blue-400">ca</b>tion
+        <h1 className="special-font font-zentry text-center text-7xl font-black uppercase sm:text-9xl md:text-[10rem]">
+          Edu<b>ca</b>tion
         </h1>
       </div>
     </div>
