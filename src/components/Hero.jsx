@@ -1,13 +1,28 @@
+import { useState, useRef } from "react";
 import { TiLocationArrow } from "react-icons/ti";
 import Button from "./Button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
+import Loader from "./Loader";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef(null);
+
+  const handleVideoLoad = () => {
+    setVideoLoaded(true);
+  };
+
+  const handleLoadComplete = () => {
+    setIsLoading(false);
+  };
+
   useGSAP(() => {
+    if (!isLoading && videoLoaded) {
     // Initial setup for text for the reveal effect
     // We want the text to be initially hidden (clipped)
     gsap.set("#hero-heading-name", {
@@ -74,9 +89,12 @@ const Hero = () => {
       duration: 0.8,
       ease: "power2.out",
     });
-  }, []); // Empty dependency array means this runs once on mount
+    }
+  }, [isLoading, videoLoaded]);
 
   return (
+    <>
+      {isLoading && <Loader onLoadComplete={handleLoadComplete} />}
     <div className="hero-container relative h-dvh w-screen overflow-x-hidden">
       <div
         id="video-frame"
@@ -87,12 +105,14 @@ const Hero = () => {
         }}
       >
         <video
+          ref={videoRef}
           src={"/videos/hero-1.mp4"}
           autoPlay
           loop
           muted
           playsInline
-          className="absolute left-0 top-0 size-full object-cover object-center z-0"
+          onLoadedData={handleVideoLoad}
+          className="absolute left-0 top-0 z-0 size-full object-cover object-center"
         />
         <div className="absolute inset-0 z-10 bg-black opacity-50"></div>
 
@@ -104,11 +124,11 @@ const Hero = () => {
           <div className="mt-24 px-5 sm:px-10" id="hero-text-content">
             <h1
               id="hero-heading-name"
-              className="hero-heading text-white special-font mb-5 lg:mb-0"
+              className="hero-heading special-font mb-5 text-white lg:mb-0"
             >
               <b>THU</b> <b>YAIN</b> <b>SOE</b>
             </h1>
-            <p className="mb-5 max-w-64 md:max-w-80 lg:max-w-3xl font-robert-regular text-white">
+            <p className="font-robert-regular mb-5 max-w-64 text-white md:max-w-80 lg:max-w-3xl">
               I craft responsive, SEO-friendly, and scalable web applications
               using React, TypeScript, and modern frameworks. With 3+ years of
               experience, I specialize in building HR systems, e-commerce
@@ -137,6 +157,7 @@ const Hero = () => {
         <b>WEB</b> DEVELOPER
       </h1>
     </div>
+    </>
   );
 };
 

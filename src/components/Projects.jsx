@@ -1,91 +1,10 @@
-import { useRef, useCallback } from "react";
-import { Github, Link as LinkIcon } from "lucide-react";
+import { useRef } from "react";
+import { Github, Link as LinkIcon, ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-import Particles from "react-tsparticles";
-import { loadSlim } from "tsparticles-slim";
 
 gsap.registerPlugin(ScrollTrigger);
-
-export const ProjectCard = ({
-  projectNumber,
-  title,
-  description,
-  techStack,
-  liveLink,
-  repoLink,
-}) => {
-  return (
-    <div className="relative size-full overflow-hidden">
-      <div
-        aria-hidden="true"
-        className={`special-font pointer-events-none absolute -top-1/4 right-0 select-none text-[40rem] font-black leading-none tracking-tighter opacity-30 ${
-          projectNumber === "01" || projectNumber === "03"
-            ? "text-[#e0b800]"
-            : "text-[#00d1db]"
-        }`}
-      >
-        {projectNumber}
-      </div>
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-      <div
-        onClick={() => {
-          console.log("lee");
-        }}
-        className="relative z-10 flex size-full flex-col justify-end p-4 text-white md:p-6 lg:p-8"
-      >
-        <div>
-          <h1 className="bento-title special-font text-2xl font-bold md:text-3xl lg:text-4xl">
-            {title}
-          </h1>
-          <p className="project-description font-robert-regular mt-2 max-w-2xl text-sm text-white/80 md:text-base">
-            {description}
-          </p>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {techStack.map((tech) => (
-            <span
-              key={tech}
-              className="tech-tag rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        <div className="mt-6 flex items-center gap-4">
-          {liveLink && (
-            <a
-              href={liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link flex items-center gap-2 text-sm transition-colors hover:text-yellow-300"
-            >
-              <LinkIcon size={16} />
-              Live Site
-            </a>
-          )}
-          {repoLink && (
-            <a
-              href={repoLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link flex items-center gap-2 text-sm transition-colors hover:text-gray-400"
-            >
-              <Github size={16} />
-              Source Code
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export const BentoTilt = ({ children, className = "" }) => (
-  <div className={className}>{children}</div>
-);
 
 const projectsData = [
   {
@@ -95,6 +14,7 @@ const projectsData = [
       "A full-stack application built with NestJS and React, designed to manage users, products, and purchase orders. The project is still in progress and serves as a practical learning experience while I explore and improve my skills with NestJS. It demonstrates my ability to structure backend APIs, integrate them with a React frontend, and build scalable features step by step.",
     techStack: ["NestJS", "React", "TypeScript", "PostgreSQL"],
     repoLink: "https://github.com/thuyainsoe/inventory-management",
+    accent: "cyan",
   },
   {
     id: 2,
@@ -103,14 +23,16 @@ const projectsData = [
       "An e-commerce platform for selling wallpapers and stickers, featuring product browsing, checkout, and secure payment integration for a smooth shopping experience.",
     techStack: ["NextJS", "TypeScript", "Tailwind", "Laravel", "MySQL"],
     liveLink: "https://fototapety-one.vercel.app/",
+    accent: "yellow",
   },
   {
     id: 3,
     title: "Uni China",
     description:
-      "Contributed to the UI development of a corporate site showcasing Uni-China Group’s 25-year business presence across retail, food trading, and F&B. Focused on responsive design, clean layout, and modern frontend practices",
+      "Contributed to the UI development of a corporate site showcasing Uni-China Group's 25-year business presence across retail, food trading, and F&B. Focused on responsive design, clean layout, and modern frontend practices",
     techStack: ["HTML", "CSS", "Wordpress", "Javascript", "PHP"],
     liveLink: "https://uni-china.com/",
+    accent: "cyan",
   },
   {
     id: 4,
@@ -120,239 +42,261 @@ const projectsData = [
     techStack: ["HTML", "CSS", "React", "Node.js", "MongoDB"],
     repoLink: "https://github.com/thuyainsoe/neobyte",
     liveLink: "http://neobyte.vercel.app/",
+    accent: "yellow",
   },
 ];
 
-const backgroundColors = [
-  "bg-zinc-900", // Project 1
-  "bg-zinc-950", // Project 2
-  "bg-zinc-900", // Project 3
-  "bg-zinc-950", // Project 4
-];
+const ProjectCard = ({ project, index }) => {
+  const cardRef = useRef(null);
+  const { title, description, techStack, liveLink, repoLink, accent } = project;
 
-const particleConfigs = [
-  // Config 1 (Yellow Accent)
-  {
-    particles: {
-      number: { value: 60 },
-      color: { value: "#f5d63d" },
-      opacity: { value: 0.8 },
-      size: { value: 2 },
-      links: {
-        enable: true,
-        distance: 150,
-        color: "#f5d63d",
-        opacity: 0.2,
-        width: 1,
-      },
-      move: { enable: true, speed: 1.5 },
+  const accentColors = {
+    cyan: {
+      border: "border-cyan-400/30",
+      glow: "shadow-cyan-500/20",
+      text: "text-cyan-400",
+      bg: "from-cyan-500/10 to-transparent",
+      number: "text-cyan-400/20",
+      hover: "hover:border-cyan-400/50 hover:shadow-cyan-500/30",
     },
-  },
-  // Config 2 (Red Accent)
-  {
-    particles: {
-      number: { value: 40 },
-      color: { value: "#00d1db" },
-      shape: { type: "circle" },
-      opacity: { value: 0.8, random: true },
-      size: { value: { min: 1, max: 4 }, random: true },
-      move: {
-        enable: true,
-        speed: 3,
-        direction: "bottom-right",
-        out_mode: "out",
-      },
+    yellow: {
+      border: "border-yellow-400/30",
+      glow: "shadow-yellow-500/20",
+      text: "text-yellow-400",
+      bg: "from-yellow-500/10 to-transparent",
+      number: "text-yellow-400/20",
+      hover: "hover:border-yellow-400/50 hover:shadow-yellow-500/30",
     },
-  },
-  // Config 3 (Yellow Accent)
-  {
-    particles: {
-      number: { value: 50 },
-      color: { value: "#f5d63d" },
-      shape: { type: "edge" },
-      opacity: { value: 0.8 },
-      size: { value: 1.5 },
-      move: { enable: true, speed: 1, straight: true, out_mode: "bounce" },
-    },
-  },
-  // Config 4 (Red Accent)
-  {
-    particles: {
-      number: { value: 25 },
-      color: { value: "#00d1db" },
-      shape: { type: "circle" },
-      opacity: { value: 0.8, random: true },
-      size: { value: { min: 2, max: 6 }, random: true },
-      move: { enable: true, speed: 1.5, direction: "top", out_mode: "out" },
-    },
-  },
-];
+  };
 
-const Projects = () => {
-  const mainRef = useRef(null);
-  const particlesInit = useCallback(
-    async (engine) => await loadSlim(engine),
-    []
-  );
+  const colors = accentColors[accent];
 
   useGSAP(
     () => {
-      gsap.set(".project-panel:not(:first-child)", { yPercent: 100 });
-      gsap.set(".bento-title", { xPercent: 100, opacity: 0 });
-      gsap.set(".project-description", { yPercent: 50, opacity: 0 });
-      gsap.set([".tech-tag", ".project-link"], { yPercent: 100, opacity: 0 });
+      const card = cardRef.current;
 
-      const tl = gsap.timeline({
+      // Initial state
+      gsap.set(card, { y: 50, opacity: 0 });
+
+      // Scroll animation
+      gsap.to(card, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: mainRef.current,
-          pin: true,
-          start: "top top",
-          end: `+=${projectsData.length * 1000}`,
-          scrub: 1,
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
         },
       });
 
-      // Title Doors Animation
-      tl.to(".clip-triangle-top-project", {
-        xPercent: -100,
-        ease: "power2.inOut",
+      // Mouse move parallax effect
+      const handleMouseMove = (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+
+        gsap.to(card, {
+          rotateX: -rotateX,
+          rotateY: rotateY,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      };
+
+      const handleMouseLeave = () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      };
+
+      card.addEventListener("mousemove", handleMouseMove);
+      card.addEventListener("mouseleave", handleMouseLeave);
+
+      return () => {
+        card.removeEventListener("mousemove", handleMouseMove);
+        card.removeEventListener("mouseleave", handleMouseLeave);
+      };
+    },
+    { scope: cardRef }
+  );
+
+  return (
+    <div
+      ref={cardRef}
+      className={`group relative overflow-hidden rounded-2xl border ${colors.border} ${colors.hover} bg-zinc-900/50 p-8 shadow-2xl ${colors.glow} backdrop-blur-sm transition-all duration-300`}
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      {/* Glass morphism overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+      {/* Animated gradient background */}
+      <div
+        className={`absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br ${colors.bg} opacity-30 blur-3xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-50`}
+      />
+
+      {/* Project number watermark */}
+      <div
+        className={`special-font pointer-events-none absolute -right-8 -top-4 select-none text-[12rem] font-black leading-none ${colors.number} transition-all duration-500 group-hover:scale-110`}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Title with accent */}
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <h3 className={`special-font text-3xl font-bold text-white transition-colors duration-300 ${colors.text}`}>
+            {title}
+          </h3>
+          <div className="flex gap-2">
+            {liveLink && (
+              <a
+                href={liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex size-10 items-center justify-center rounded-lg border ${colors.border} bg-white/5 backdrop-blur-sm transition-all duration-300 hover:scale-110 ${colors.hover}`}
+                aria-label="Live site"
+              >
+                <ArrowUpRight size={18} className={colors.text} />
+              </a>
+            )}
+            {repoLink && (
+              <a
+                href={repoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex size-10 items-center justify-center rounded-lg border ${colors.border} bg-white/5 backdrop-blur-sm transition-all duration-300 hover:scale-110 ${colors.hover}`}
+                aria-label="GitHub repository"
+              >
+                <Github size={18} className={colors.text} />
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Description */}
+        <p className="mb-6 font-robert-regular leading-relaxed text-gray-300">
+          {description}
+        </p>
+
+        {/* Tech stack */}
+        <div className="flex flex-wrap gap-2">
+          {techStack.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Links section */}
+        {(liveLink || repoLink) && (
+          <div className="mt-6 flex flex-wrap gap-4 border-t border-white/10 pt-6">
+            {liveLink && (
+              <a
+                href={liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-2 text-sm font-medium transition-all duration-300 ${colors.text} hover:gap-3`}
+              >
+                <LinkIcon size={16} />
+                View Live Site
+              </a>
+            )}
+            {repoLink && (
+              <a
+                href={repoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-medium text-gray-400 transition-all duration-300 hover:gap-3 hover:text-white"
+              >
+                <Github size={16} />
+                Source Code
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Projects = () => {
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+
+  useGSAP(
+    () => {
+      // Title animation
+      gsap.from(".projects-title", {
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
       });
-      tl.to(
-        ".clip-triangle-bottom-project",
-        { xPercent: 100, ease: "power2.inOut" },
-        "<"
-      );
 
-      tl.set(".experience-title-container", { zIndex: 1 });
-
-      tl.to(
-        ".project-panel-0 .bento-title",
-        { xPercent: 0, opacity: 1, ease: "power3.out", duration: 1 },
-        ">-0.5"
-      )
-        .to(
-          ".project-panel-0 .project-description",
-          { yPercent: 0, opacity: 1, ease: "power3.out", duration: 0.8 },
-          "<0.2"
-        )
-        .to(
-          ".project-panel-0 .tech-tag",
-          {
-            yPercent: 0,
-            opacity: 1,
-            stagger: 0.05,
-            ease: "power2.out",
-            duration: 0.5,
-          },
-          "<0.3"
-        )
-        .to(
-          ".project-panel-0 .project-link",
-          { yPercent: 0, opacity: 1, stagger: 0.1, ease: "power2.out" },
-          "<"
-        );
-
-      projectsData.forEach((_, index) => {
-        if (index > 0) {
-          const panelSelector = `.project-panel-${index}`;
-          tl.to(
-            panelSelector,
-            { yPercent: 0, ease: "power2.inOut" },
-            `project${index}`
-          );
-
-          tl.to(
-            `${panelSelector} .bento-title`,
-            { xPercent: 0, opacity: 1, ease: "power3.out", duration: 1 },
-            "<0.5"
-          )
-            .to(
-              `${panelSelector} .project-description`,
-              { yPercent: 0, opacity: 1, ease: "power3.out", duration: 0.8 },
-              "<0.2"
-            )
-            .to(
-              `${panelSelector} .tech-tag`,
-              {
-                yPercent: 0,
-                opacity: 1,
-                stagger: 0.05,
-                ease: "power2.out",
-                duration: 0.5,
-              },
-              "<0.3"
-            )
-            .to(
-              `${panelSelector} .project-link`,
-              { yPercent: 0, opacity: 1, stagger: 0.1, ease: "power2.out" },
-              "<"
-            );
-        }
+      // Subtitle animation
+      gsap.from(".projects-subtitle", {
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
       });
     },
-    { scope: mainRef }
+    { scope: sectionRef }
   );
 
   return (
     <section
-      ref={mainRef}
+      ref={sectionRef}
       id="projects"
-      className="relative min-h-screen w-screen overflow-hidden bg-black"
+      className="relative min-h-screen w-screen overflow-hidden bg-black py-20 md:py-32"
     >
-      <div className="experience-title-container absolute inset-0 z-50">
-        <div className="clip-triangle-top-project absolute inset-0 flex-center bg-white">
-          <video
-            src={"/videos/hero-2.mp4"}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute left-0 top-0 z-0 size-full object-cover"
-          />
-          <div className="absolute inset-0 z-0 bg-black opacity-50"></div>
-          <div className="relative z-10 special-font text-center font-zentry text-7xl font-black uppercase !text-[#00f6ff] sm:text-9xl md:text-8xl lg:text-[10rem]">
-            Pro<b>je</b>ct<b>s</b>
-          </div>
-        </div>
-        <div className="clip-triangle-bottom-project absolute inset-0 flex-center bg-white">
-          <video
-            src={"/videos/hero-2.mp4"}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute left-0 top-0 z-0 size-full object-cover"
-          />
-          <div className="absolute inset-0 z-0 bg-black opacity-50"></div>
-          <div className="relative z-10 special-font text-center font-zentry text-7xl font-black uppercase !text-[#f5d63d] sm:text-9xl md:text-8xl lg:text-[10rem]">
-            Pro<b>je</b>ct<b>s</b>
-          </div>
-        </div>
-      </div>
+      {/* Ambient background elements */}
+      <div className="absolute left-1/4 top-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
+      <div className="absolute bottom-20 right-1/4 h-96 w-96 rounded-full bg-yellow-500/10 blur-[120px]" />
 
-      <div className="projects-wrapper absolute inset-0">
-        {projectsData.map((project, index) => (
-          <div
-            key={project.id}
-            className={`project-panel project-panel-${index} absolute inset-0 ${backgroundColors[index]}`}
-            style={{ zIndex: 10 + index }}
-          >
-            <Particles
-              id={`tsparticles-${project.id}`}
-              init={particlesInit}
-              options={particleConfigs[index]}
-              className="absolute inset-0 z-0"
-            />
-            <div className="relative z-10 h-full w-full">
-              <BentoTilt className="h-full w-full p-4 md:p-8">
-                <ProjectCard
-                  {...project}
-                  projectNumber={String(index + 1).padStart(2, "0")}
-                />
-              </BentoTilt>
-            </div>
-          </div>
-        ))}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section Title */}
+        <div ref={titleRef} className="mb-16 text-center">
+          <h2 className="projects-title special-font mb-4 text-6xl font-black uppercase text-white sm:text-7xl md:text-8xl lg:text-9xl">
+            Pro<span className="text-cyan-400">je</span>ct
+            <span className="text-yellow-400">s</span>
+          </h2>
+          <p className="projects-subtitle font-robert-regular mx-auto max-w-2xl text-lg text-gray-400">
+            A collection of projects showcasing my skills in full-stack
+            development, UI/UX design, and modern web technologies.
+          </p>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {projectsData.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
