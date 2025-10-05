@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const educationData = {
   school: "University Of Computer Studies, Yangon",
   degree: "Bachelor of Computer Science (B.C.Sc)",
-  duration: "2018 - 2023",
+  duration: "2016 - 2020",
   description:
     "Focused on core computer science principles including software development, data structures, and algorithms. My final year project involved developing a full-stack web application, which sparked my passion for front-end development and user experience design.",
   subjects: [
@@ -52,7 +52,6 @@ const Education = () => {
 
     // --- Animation Sequence ---
 
-    // 1. Education Content Container ကို Fade In လုပ်ပြီး နေရာမှန်ရောက်အောင်လုပ်မယ်
     mainTl.to(".education-content-container", {
       opacity: 1,
       y: 0,
@@ -60,7 +59,6 @@ const Education = () => {
       duration: 1,
     });
 
-    // 2. Content ပေါ်လာတာနဲ့ Title ကို အပေါ်ရွှေ့ပြီး Fade Out လုပ်မယ်
     mainTl.to(
       ".education-main-title",
       {
@@ -69,10 +67,9 @@ const Education = () => {
         ease: "power2.out",
         duration: 1,
       },
-      "<" // content ဝင်လာတာနဲ့ တစ်ပြိုင်နက်တည်းစမယ်
+      "<"
     );
 
-    // 3. Content ထဲက detail စာသားတွေကို တစ်ခုချင်းစီ Stagger နဲ့ဖော်ပြမယ်
     mainTl.to(
       [
         ".edu-school",
