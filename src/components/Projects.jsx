@@ -102,7 +102,7 @@ const projectsData = [
     description:
       "An e-commerce platform for selling wallpapers and stickers, featuring product browsing, checkout, and secure payment integration for a smooth shopping experience.",
     techStack: ["NextJS", "TypeScript", "Tailwind", "Laravel", "MySQL"],
-    liveLink: "https://fototapety-one.vercel.app/",
+    liveLink: "https://128.199.102.109/",
   },
   {
     id: 3,
